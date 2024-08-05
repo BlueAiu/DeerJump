@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     float chargeTime = 0f;
     [Tooltip("タメが最大になるまでの時間(s)")]
     [SerializeField] float chargeLimit = 1f;
+    [Tooltip("タメの最小値(1未満)")]
+    [SerializeField] float chargeMin = 0.1f;
     float chargeLate = 0f;
 
 
@@ -26,6 +28,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float acceleration = 1f;
     [Tooltip("左右速度の制限")]
     [SerializeField] float limitSpeed = 5f;
+    [Tooltip("左右ワープの座標")]
+    [SerializeField] float warpPosition = 10f;
 
     [SerializeField] TMP_Text TMP_Text;
 
@@ -57,6 +61,8 @@ public class PlayerController : MonoBehaviour
         }
         else if (chargeTime > 0f)
         {
+            chargeLate = chargeMin + chargeLate * (1 - chargeMin);
+
             velocity_.y = jumpPower * chargeLate;
             chargeTime = 0; chargeLate = 0;
         }
@@ -68,5 +74,14 @@ public class PlayerController : MonoBehaviour
     {
         velocity_.x += InputManeger.HorizontalAxis() * acceleration * Time.deltaTime;
         velocity_.x = Mathf.Clamp(velocity_.x, -limitSpeed, limitSpeed);
+
+        if(transform.position.x > warpPosition)
+        {
+            transform.position += Vector3.left * 2 * warpPosition;
+        }
+        else if(transform.position.x < -warpPosition)
+        {
+            transform.position += Vector3.right * 2 * warpPosition;
+        }
     }
 }
