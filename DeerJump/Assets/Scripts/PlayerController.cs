@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
     [Header("水平方向の移動")]
     [Tooltip("左右入力の加速度")]
     [SerializeField] float acceleration = 1f;
+    [Tooltip("タメ中の左右速度の倍率")]
+    [SerializeField] float chargingAccelerateLate = 0.5f;
     [Tooltip("左右速度の制限")]
     [SerializeField] float limitSpeed = 5f;
     [Tooltip("左右ワープの座標")]
@@ -79,7 +81,14 @@ public class PlayerController : MonoBehaviour
     {
         if (!isground)
         {
-            velocity_.x += InputManeger.HorizontalAxis() * acceleration * Time.deltaTime;
+            if (InputManeger.IsCharging())
+            {
+                velocity_.x += InputManeger.HorizontalAxis() * acceleration * chargingAccelerateLate * Time.deltaTime;
+            }
+            else
+            {
+                velocity_.x += InputManeger.HorizontalAxis() * acceleration * Time.deltaTime;
+            }
             velocity_.x = Mathf.Clamp(velocity_.x, -limitSpeed, limitSpeed);
         }
 
