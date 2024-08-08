@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     new Rigidbody2D rigidbody;
     Vector2 velocity_;
+    public bool isground { get; private set; } = true;
 
     [Header("‚’¼•ûŒü‚ÌˆÚ“®")]
     [Tooltip("I’[‘¬“x")]
@@ -63,7 +64,11 @@ public class PlayerController : MonoBehaviour
         {
             chargeLate = chargeMin + chargeLate * (1 - chargeMin);
 
-            velocity_.y = jumpPower * chargeLate;
+            if (isground)
+            {
+                velocity_.y = jumpPower * chargeLate;
+                isground = false;
+            }
             chargeTime = 0; chargeLate = 0;
         }
 
@@ -72,8 +77,11 @@ public class PlayerController : MonoBehaviour
 
     void HorizontalVelocity()
     {
-        velocity_.x += InputManeger.HorizontalAxis() * acceleration * Time.deltaTime;
-        velocity_.x = Mathf.Clamp(velocity_.x, -limitSpeed, limitSpeed);
+        if (!isground)
+        {
+            velocity_.x += InputManeger.HorizontalAxis() * acceleration * Time.deltaTime;
+            velocity_.x = Mathf.Clamp(velocity_.x, -limitSpeed, limitSpeed);
+        }
 
         if(transform.position.x > warpPosition)
         {
@@ -82,6 +90,25 @@ public class PlayerController : MonoBehaviour
         else if(transform.position.x < -warpPosition)
         {
             transform.position += Vector3.right * 2 * warpPosition;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Platform")
+        {
+            if (rigidbody.velocity.y <= 0)
+            {
+                isground = true;
+            }
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Platform")
+        {
+            isground = false;
         }
     }
 }
