@@ -9,7 +9,7 @@ enum PlayerState
     Normal, DoubleJump, FastFalling
 }
 
-public class PlayerController : MonoBehaviour
+public partial class PlayerController : MonoBehaviour
 {
     new Rigidbody2D rigidbody;
     Vector2 velocity_;
@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float fastGravityScale = 2f;
     [SerializeField] float fastJumpPower = 10f;
     [SerializeField] float fastHighJumpPower = 20f;
+    [SerializeField] float fastChargeLate = 2f;
 
     [SerializeField] TMP_Text TMP_Text;
 
@@ -74,6 +75,8 @@ public class PlayerController : MonoBehaviour
 
         StateChanger();
 
+        Shrinking();
+
         TMP_Text.text = chargeLate.ToString();
     }
 
@@ -81,7 +84,9 @@ public class PlayerController : MonoBehaviour
 
         if (InputManeger.IsCharging())
         {
-            chargeTime = Mathf.Min(chargeTime + Time.deltaTime, chargeLimit);
+            chargeTime += Time.deltaTime * (state == PlayerState.FastFalling ? fastChargeLate : 1);
+
+            chargeTime = Mathf.Min(chargeTime, chargeLimit);
             chargeLate = chargeTime / chargeLimit;
         }
         else if (chargeTime > 0f)
