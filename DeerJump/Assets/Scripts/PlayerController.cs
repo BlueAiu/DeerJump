@@ -54,8 +54,6 @@ public partial class PlayerController : MonoBehaviour
     [SerializeField] float fastHighJumpPower = 20f;
     [SerializeField] float fastChargeLate = 2f;
 
-    [SerializeField] TMP_Text TMP_Text;
-
     // Start is called before the first frame update
     void Awake()
     {
@@ -76,8 +74,6 @@ public partial class PlayerController : MonoBehaviour
         StateChanger();
 
         Shrinking();
-
-        TMP_Text.text = chargeLate.ToString();
     }
 
     void VerticalVelocity() {
