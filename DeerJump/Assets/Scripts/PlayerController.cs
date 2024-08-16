@@ -53,12 +53,14 @@ public partial class PlayerController : MonoBehaviour
     [SerializeField] float fastJumpPower = 10f;
     [SerializeField] float fastHighJumpPower = 20f;
     [SerializeField] float fastChargeLate = 2f;
+    [SerializeField] float fastXMoveLate = 1.5f;
 
     // Start is called before the first frame update
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         currentJumpPower = jumpPower;
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -91,8 +93,11 @@ public partial class PlayerController : MonoBehaviour
 
             if (jumpableTime > 0)
             {
+                //Jump
                 float thisJumpPower = currentJumpPower * Mathf.Sqrt(chargeLate);
                 velocity_.y = Mathf.Min(Mathf.Max(thisJumpPower, velocity_.y + thisJumpPower), currentJumpPower);
+
+                PlaySE(AudioType.Jump);
 
                 if(!isground)
                 {
@@ -109,14 +114,11 @@ public partial class PlayerController : MonoBehaviour
     {
         if (!isground)
         {
-            if (InputManeger.IsCharging())
-            {
-                velocity_.x += InputManeger.HorizontalAxis() * acceleration * chargingAccelerateLate * Time.deltaTime;
-            }
-            else
-            {
-                velocity_.x += InputManeger.HorizontalAxis() * acceleration * Time.deltaTime;
-            }
+            float fastItemLate = state == PlayerState.FastFalling ? fastXMoveLate : 1;
+            float chargingLate = InputManeger.IsCharging() ? chargingAccelerateLate : 1;
+
+            velocity_.x += InputManeger.HorizontalAxis() * acceleration * chargingLate * fastItemLate * Time.deltaTime;
+
             velocity_.x = Mathf.Clamp(velocity_.x, -limitSpeed, limitSpeed);
         }
 
@@ -177,13 +179,18 @@ public partial class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Item")
         {
+            PlaySE(AudioType.ItemGet);
+
             var itemName = collision.gameObject.name;
+
             if (itemName.Contains("HighJump"))
             {
                 if (state != PlayerState.FastFalling)
                     rigidbody.velocity = new Vector2(rigidbody.velocity.x, highJumpPower);
                 else
                     rigidbody.velocity = new Vector2(rigidbody.velocity.x, fastHighJumpPower);
+
+                PlaySE(AudioType.HighJump);
             }
             else if (itemName.Contains("DoubleJump"))
             {
