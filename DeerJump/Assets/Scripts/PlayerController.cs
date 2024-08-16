@@ -76,6 +76,8 @@ public partial class PlayerController : MonoBehaviour
         StateChanger();
 
         Shrinking();
+
+        FullChargeColor();
     }
 
     void VerticalVelocity() {
@@ -107,7 +109,7 @@ public partial class PlayerController : MonoBehaviour
             chargeTime = 0; chargeLate = 0;
         }
 
-        velocity_.y = Mathf.Max(velocity_.y, -terminalVelocity);
+        velocity_.y = Mathf.Max(velocity_.y, -terminalVelocity * (state == PlayerState.FastFalling ? fastGravityScale : 1));
     }
 
     void HorizontalVelocity()

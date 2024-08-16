@@ -4,9 +4,12 @@ using UnityEngine;
 
 public partial class PlayerController : MonoBehaviour
 {
-    [Header("èkÇﬁêgëÃ")]
+    [Header("èkÇﬁêgëÃÇ∆êFÇÃïœâª")]
     [Tooltip("Ç«Ç±Ç‹Ç≈èkÇﬁÇ©")]
     [SerializeField] float shrinkSize = 0.5f;
+
+    [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] float ColorChangePeriod = 0.2f;
 
     void Shrinking()
     {
@@ -17,5 +20,22 @@ public partial class PlayerController : MonoBehaviour
 
         transform.localScale += new Vector3(0, diffSize, 0);
         transform.position += new Vector3(0, diffSize, 0);
+    }
+
+    void FullChargeColor()
+    {
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = transform.GetComponentInChildren<SpriteRenderer>();
+        }
+
+        if (chargeLate >= 1 && Time.time % ColorChangePeriod < ColorChangePeriod / 2)
+        {
+            spriteRenderer.color = Color.yellow;
+        }
+        else
+        {
+            spriteRenderer.color = Color.white;
+        }
     }
 }

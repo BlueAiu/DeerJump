@@ -164,8 +164,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 086278dc9122011489e4bca19fc541a6, type: 3}
   - {fileID: 8300000, guid: aa2a737d8fa4dec4480ab117102032ad, type: 3}
   - {fileID: 8300000, guid: 9377fb46990b58548b77c849f4e753cd, type: 3}
-  terminalVelocity: 10
-  jumpPower: 9.25
+  terminalVelocity: 8.5
+  jumpPower: 9.5
   chargeLimit: 0.8
   chargeMin: 0.1
   acceleration: 5
@@ -180,6 +180,8 @@ MonoBehaviour:
   fastChargeLate: 2
   fastXMoveLate: 1.5
   shrinkSize: 0.5
+  spriteRenderer: {fileID: 695022823}
+  ColorChangePeriod: 0.2
 --- !u!61 &498474496
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -358,7 +360,7 @@ Transform:
   m_GameObject: {fileID: 498474494}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.154, y: 0.382, z: 0}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -566,7 +568,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.22321105, g: 0.41523275, b: 0.7169812, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -647,7 +649,7 @@ GameObject:
   - component: {fileID: 695022822}
   - component: {fileID: 695022823}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -708,7 +710,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -239126211, guid: 0fda042bd7665744699eedcb51fb78d2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -971,6 +973,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1844876119786665809, guid: 09a0ec2e1059ec340a524b9ecc4e94c5, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3673424108374701840, guid: 09a0ec2e1059ec340a524b9ecc4e94c5, type: 3}
       propertyPath: m_Name
       value: Item(FastFalling)
