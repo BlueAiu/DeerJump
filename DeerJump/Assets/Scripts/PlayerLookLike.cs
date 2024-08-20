@@ -19,7 +19,7 @@ public partial class PlayerController : MonoBehaviour
         float diffSize = targetSize - currentSize;
 
         transform.localScale += new Vector3(0, diffSize, 0);
-        transform.position += new Vector3(0, diffSize, 0);
+        //transform.position += new Vector3(0, diffSize, 0);
     }
 
     void FullChargeColor()

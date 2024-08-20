@@ -55,6 +55,8 @@ public partial class PlayerController : MonoBehaviour
     [SerializeField] float fastChargeLate = 2f;
     [SerializeField] float fastXMoveLate = 1.5f;
 
+    [SerializeField] GameObject itemParticle;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -145,12 +147,16 @@ public partial class PlayerController : MonoBehaviour
         {
             state = PlayerState.Normal;
 
+            stateTimer = 0;
+
             maxJumpableTime = 1;
             if(!isground)
                 jumpableTime--;
 
             currentJumpPower = jumpPower;
             rigidbody.gravityScale = 1f;
+
+            itemParticle.SetActive(false);
         }
     }
 
@@ -170,7 +176,7 @@ public partial class PlayerController : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Platform")
+        if(collision.gameObject.tag == "Platform" && isground)
         {
             isground = false;
             jumpableTime--;
@@ -204,6 +210,8 @@ public partial class PlayerController : MonoBehaviour
 
                 currentJumpPower = jumpPower;
                 rigidbody.gravityScale = 1f;
+
+                itemParticle.SetActive(true);
             }
             else if (itemName.Contains("FastFalling"))
             {
@@ -215,6 +223,8 @@ public partial class PlayerController : MonoBehaviour
 
                 currentJumpPower = fastJumpPower;
                 rigidbody.gravityScale = fastGravityScale;
+
+                itemParticle.SetActive(true);
             }
 
             Destroy(collision.gameObject);
