@@ -10,6 +10,14 @@ public class WaterScript : MonoBehaviour
 
     float velocity;
 
+
+
+
+    public void Init()
+    {
+        transform.position = velocity * surfaceTime * Vector3.down;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +25,7 @@ public class WaterScript : MonoBehaviour
         float surfaceToGoalTime = goalTime - surfaceTime;
         velocity = distance / surfaceToGoalTime;
 
-        transform.position = velocity * surfaceTime * Vector3.down;
+        Init();
     }
 
     // Update is called once per frame

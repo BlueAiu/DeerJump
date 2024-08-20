@@ -17,6 +17,9 @@ public partial class PlayerController : MonoBehaviour
     public bool isground { get; private set; } = true;
     PlayerState state = PlayerState.Normal;
     float stateTimer = 0f;
+    Vector3 initPos;
+
+    [SerializeField] GameRuleManegenent gameRuleManeger;
 
     [Header("êÇíºï˚å¸ÇÃà⁄ìÆ")]
     [Tooltip("èIí[ë¨ìx")]
@@ -58,13 +61,38 @@ public partial class PlayerController : MonoBehaviour
 
     [SerializeField] GameObject itemParticle;
 
+
+
+    public void Init()
+    {
+        transform.position = initPos;
+        transform.rotation = Quaternion.identity;
+
+        spriteRenderer.sprite = normal;
+        currentJumpPower = jumpPower;
+        
+        state = PlayerState.Normal;
+        stateTimer = 0;
+
+        maxJumpableTime = 1;
+        jumpableTime = maxJumpableTime;
+
+        currentJumpPower = jumpPower;
+        rigidbody.gravityScale = 1f;
+
+        itemParticle.SetActive(false);
+        rigidbody.bodyType = RigidbodyType2D.Dynamic;
+    }
+
     // Start is called before the first frame update
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-        currentJumpPower = jumpPower;
         audio = GetComponent<AudioSource>();
-        spriteRenderer.sprite = normal;
+
+        initPos = transform.position;
+
+        Init();
     }
 
     // Update is called once per frame
@@ -235,7 +263,9 @@ public partial class PlayerController : MonoBehaviour
         {
             spriteRenderer.sprite = whiteDeer;
             transform.localEulerAngles = new Vector3(0, 0, -90);
+            rigidbody.bodyType = RigidbodyType2D.Static;
             PlaySE(AudioType.Miss);
+            gameRuleManeger.SendMiss();
         }
     }
     
