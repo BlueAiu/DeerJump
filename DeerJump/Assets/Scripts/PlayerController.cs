@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -63,6 +64,7 @@ public partial class PlayerController : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         currentJumpPower = jumpPower;
         audio = GetComponent<AudioSource>();
+        spriteRenderer.sprite = normal;
     }
 
     // Update is called once per frame
@@ -128,11 +130,11 @@ public partial class PlayerController : MonoBehaviour
 
         if(transform.position.x > warpPosition)
         {
-            transform.position += Vector3.left * 2 * warpPosition;
+            transform.position += Vector3.left * (2 * warpPosition);
         }
         else if(transform.position.x < -warpPosition)
         {
-            transform.position += Vector3.right * 2 * warpPosition;
+            transform.position += Vector3.right * (2 * warpPosition);
         }
     }
 
@@ -164,7 +166,7 @@ public partial class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Platform")
+        if(collision.gameObject.CompareTag("Platform"))
         {
             if (rigidbody.velocity.y <= 0)
             {
@@ -176,7 +178,7 @@ public partial class PlayerController : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Platform" && isground)
+        if(collision.gameObject.CompareTag("Platform") && isground)
         {
             isground = false;
             jumpableTime--;
@@ -185,7 +187,7 @@ public partial class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Item")
+        if (collision.gameObject.CompareTag("Item"))
         {
             PlaySE(AudioType.ItemGet);
 
@@ -229,5 +231,12 @@ public partial class PlayerController : MonoBehaviour
 
             Destroy(collision.gameObject);
         }
+        else if (collision.gameObject.CompareTag("Water"))
+        {
+            spriteRenderer.sprite = whiteDeer;
+            transform.localEulerAngles = new Vector3(0, 0, -90);
+            PlaySE(AudioType.Miss);
+        }
     }
+    
 }

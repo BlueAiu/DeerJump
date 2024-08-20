@@ -10,6 +10,8 @@ public partial class PlayerController : MonoBehaviour
 
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] float ColorChangePeriod = 0.2f;
+    [SerializeField] Sprite normal;
+    [SerializeField] Sprite whiteDeer;
 
     void Shrinking()
     {
