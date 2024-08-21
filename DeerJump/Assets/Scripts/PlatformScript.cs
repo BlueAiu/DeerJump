@@ -3,14 +3,26 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+public enum PlatformType
+{
+    Normal,
+    Ice,
+    Move,
+    Belt
+}
+
 public class PlatformScript : MonoBehaviour
 {
+    [SerializeField] public static Sprite[] sprites;
+
+    [SerializeField] public PlatformType type;
+
     [Tooltip("Ž©•ª‚ª“®‚­‘¬‚³")]
-    [SerializeField] float moveSpeed = 0f;
-    [SerializeField] float moveRange = 0f;
+    [SerializeField] public float moveSpeed = 0f;
+    [SerializeField] public float moveRange = 0f;
     float moveDirection = 1f;
     [Tooltip("æ‚Á‚Ä‚éƒvƒŒƒCƒ„[‚ð“®‚©‚·‘¬‚³")]
-    [SerializeField] float movePlayerVelocity = 0f;
+    [SerializeField] public float movePlayerVelocity = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +30,12 @@ public class PlatformScript : MonoBehaviour
         if(moveSpeed != 0)
         {
             movePlayerVelocity = moveSpeed;
+        }
+
+        if(type == PlatformType.Belt && Random.value > 0.5f)
+        {
+            moveDirection = -1f;
+            GetComponent<SpriteRenderer>().flipX = true;
         }
     }
 
@@ -34,12 +52,20 @@ public class PlatformScript : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.CompareTag("Player"))
         {
             if (collision.gameObject.GetComponent<PlayerController>().isground)
             {
                 collision.transform.position += new Vector3(movePlayerVelocity * moveDirection * Time.deltaTime, 0, 0);
             }
         }
+    }
+
+    public void Copy(PlatformScript platform, float range)
+    {
+        this.type = platform.type;
+        this.moveSpeed = platform.moveSpeed;
+        this.movePlayerVelocity = platform.movePlayerVelocity;
+        this.moveRange = range;
     }
 }

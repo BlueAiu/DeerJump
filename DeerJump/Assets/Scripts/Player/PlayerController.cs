@@ -257,7 +257,7 @@ public partial class PlayerController : MonoBehaviour
                 itemParticle.SetActive(true);
             }
 
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
         }
         else if (collision.gameObject.CompareTag("Water"))
         {
