@@ -19,7 +19,7 @@ public class StageInfomation
 
     const float platformUnit = 0.25f;
     public float platformWidth;
-    public List<PlatformScript> platforms = new();
+    public List<PlatformInfo> platforms = new();
     public List<ItemType> items = new();
 
     public List<GameObject> CreateStage()

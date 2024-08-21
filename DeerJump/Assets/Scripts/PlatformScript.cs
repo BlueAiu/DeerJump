@@ -11,6 +11,22 @@ public enum PlatformType
     Belt
 }
 
+public struct PlatformInfo
+{
+    public PlatformType type;
+    public float moveSpeed;
+    public float moveRange;
+    public float beltSpeed;
+
+    public PlatformInfo(int n = 0)
+    {
+        type = PlatformType.Normal;
+        moveSpeed = 0;
+        moveRange = 0;
+        beltSpeed = 0;
+    }
+}
+
 public class PlatformScript : MonoBehaviour
 {
     [SerializeField] public static Sprite[] sprites;
@@ -61,11 +77,11 @@ public class PlatformScript : MonoBehaviour
         }
     }
 
-    public void Copy(PlatformScript platform, float range)
+    public void Copy(PlatformInfo platform, float range)
     {
         this.type = platform.type;
         this.moveSpeed = platform.moveSpeed;
-        this.movePlayerVelocity = platform.movePlayerVelocity;
+        this.movePlayerVelocity = platform.beltSpeed;
         this.moveRange = range;
     }
 }

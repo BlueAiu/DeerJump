@@ -283,6 +283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 498474494}
   water: {fileID: 231453593}
+  camera: {fileID: 519420032}
   platformPrefab: {fileID: 3389019005726880445, guid: 3876afaa913bed443abd5a1fb5ffdccb, type: 3}
   itemPrefab: {fileID: 3673424108374701840, guid: 09a0ec2e1059ec340a524b9ecc4e94c5, type: 3}
   itemSprites:
@@ -355,7 +356,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: aa2a737d8fa4dec4480ab117102032ad, type: 3}
   - {fileID: 8300000, guid: 9377fb46990b58548b77c849f4e753cd, type: 3}
   gameRuleManeger: {fileID: 420622286}
-  terminalVelocity: 8.5
+  terminalVelocity: 4
   jumpPower: 9.5
   chargeLimit: 0.8
   chargeMin: 0.05
@@ -781,6 +782,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 498474500}
   shiftYPos: 2
+  trackSpeed: 3
 --- !u!1 &695022821
 GameObject:
   m_ObjectHideFlags: 0

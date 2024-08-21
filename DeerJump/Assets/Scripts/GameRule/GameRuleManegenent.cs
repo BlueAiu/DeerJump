@@ -9,6 +9,7 @@ public partial class GameRuleManegenent : MonoBehaviour
 
     [SerializeField] GameObject player;
     [SerializeField] GameObject water;
+    [SerializeField] new Transform camera;
 
     [SerializeField] GameObject platformPrefab;
     [SerializeField] GameObject itemPrefab;
@@ -55,6 +56,8 @@ public partial class GameRuleManegenent : MonoBehaviour
         var waterScript = water.GetComponent<WaterScript>();
         waterScript.enabled = true;
         waterScript.Init();
+
+        camera.position = new Vector3(0, 2, -10);
 
         foreach (var item in StagePlacement)
         {

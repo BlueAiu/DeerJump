@@ -12,7 +12,7 @@ public partial class GameRuleManegenent : MonoBehaviour
             stageInfo.platformWidth = 3;
             for(int i = 0; i < 23; i++)
             {
-                var platform = new PlatformScript();
+                var platform = new PlatformInfo();
                 platform.type = PlatformType.Normal;
 
                 stageInfo.platforms.Add(platform);
@@ -27,7 +27,7 @@ public partial class GameRuleManegenent : MonoBehaviour
             stageInfo.platformWidth = 3;
             for (int i = 0; i < 17; i++)
             {
-                var platform = new PlatformScript();
+                var platform = new PlatformInfo();
                 platform.type = PlatformType.Normal;
 
                 stageInfo.platforms.Add(platform);
@@ -42,7 +42,7 @@ public partial class GameRuleManegenent : MonoBehaviour
             stageInfo.platformWidth = 3;
             for (int i = 0; i < 15; i++)
             {
-                var platform = new PlatformScript();
+                var platform = new PlatformInfo();
                 platform.type = PlatformType.Normal;
 
                 stageInfo.platforms.Add(platform);
