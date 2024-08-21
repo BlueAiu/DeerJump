@@ -32,6 +32,7 @@ public class StageInfomation
             pos.y = goal.transform.position.y / (platforms.Count + 1) * (i + 1);
 
             float width = platformWidth + Random.Range(-platformUnit, platformUnit);
+            width = Mathf.Round(width / platformUnit) * platformUnit;
             float posXRange = (gameSizeWidth - width) / 2;
 
             pos.x = Random.Range(-posXRange, posXRange);
@@ -56,7 +57,7 @@ public class StageInfomation
 
             var _item = Object.Instantiate(item, pos, Quaternion.identity);
             _item.name += " " + currentItem;
-            _item.GetComponent<SpriteRenderer>().sprite = itemSprites[(int)currentItem];
+            _item.GetComponentInChildren<SpriteRenderer>().sprite = itemSprites[(int)currentItem];
 
             stage.Add(_item);
         }

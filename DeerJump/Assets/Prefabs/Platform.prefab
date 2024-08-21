@@ -191,6 +191,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be7d64e4f378b7448b9a1c70b0df55d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
+  noneSlip: {fileID: 6200000, guid: d3b4c3dab20200946a42f30f9ae2ce3f, type: 2}
+  fullSlip: {fileID: 6200000, guid: c088a7ebb2e057e4799c78145fa9c549, type: 2}
   moveSpeed: 0
   moveRange: 0
   movePlayerVelocity: 0

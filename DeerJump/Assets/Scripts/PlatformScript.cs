@@ -15,14 +15,12 @@ public struct PlatformInfo
 {
     public PlatformType type;
     public float moveSpeed;
-    public float moveRange;
     public float beltSpeed;
 
     public PlatformInfo(int n = 0)
     {
         type = PlatformType.Normal;
         moveSpeed = 0;
-        moveRange = 0;
         beltSpeed = 0;
     }
 }
@@ -32,6 +30,8 @@ public class PlatformScript : MonoBehaviour
     [SerializeField] public static Sprite[] sprites;
 
     [SerializeField] public PlatformType type;
+    [SerializeField] PhysicsMaterial2D noneSlip;
+    [SerializeField] PhysicsMaterial2D fullSlip;
 
     [Tooltip("Ž©•ª‚ª“®‚­‘¬‚³")]
     [SerializeField] public float moveSpeed = 0f;
@@ -48,7 +48,11 @@ public class PlatformScript : MonoBehaviour
             movePlayerVelocity = moveSpeed;
         }
 
-        if(type == PlatformType.Belt && Random.value > 0.5f)
+        if (type == PlatformType.Ice)
+        {
+            GetComponent<BoxCollider2D>().sharedMaterial = fullSlip;
+        }
+        else if (type == PlatformType.Belt && Random.value > 0.5f)
         {
             moveDirection = -1f;
             GetComponent<SpriteRenderer>().flipX = true;

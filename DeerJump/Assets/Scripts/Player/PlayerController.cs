@@ -243,7 +243,7 @@ public partial class PlayerController : MonoBehaviour
 
                 itemParticle.SetActive(true);
             }
-            else if (itemName.Contains("FastFalling"))
+            else if (itemName.Contains("FastFall"))
             {
                 state = PlayerState.FastFalling;
                 stateTimer = 0f;
