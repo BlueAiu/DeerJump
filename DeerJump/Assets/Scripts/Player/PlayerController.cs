@@ -262,10 +262,18 @@ public partial class PlayerController : MonoBehaviour
         else if (collision.gameObject.CompareTag("Water"))
         {
             spriteRenderer.sprite = whiteDeer;
+            spriteRenderer.color = Color.white;
             transform.localEulerAngles = new Vector3(0, 0, -90);
             rigidbody.bodyType = RigidbodyType2D.Static;
             PlaySE(AudioType.Miss);
             gameRuleManeger.SendMiss();
+        }
+        else if (collision.gameObject.name == "Goal")
+        {
+            spriteRenderer.color = Color.white;
+            rigidbody.bodyType = RigidbodyType2D.Static;
+            PlaySE(AudioType.Clear);
+            gameRuleManeger.SendClear();
         }
     }
     

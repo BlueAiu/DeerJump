@@ -23,6 +23,8 @@ public partial class GameRuleManegenent : MonoBehaviour
     public StageInfomation[] Stages { get; set; } = new StageInfomation[25];
     public List<GameObject> StagePlacement { get; set; } = new();
 
+    public float gameTimer;
+
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +37,15 @@ public partial class GameRuleManegenent : MonoBehaviour
 
         PlatformScript.sprites = platformSsprites;
 
+        if (PlayerPrefs.HasKey("HighScore"))
+        {
+            HighScore = PlayerPrefs.GetInt("HighScore");
+        }
+        else
+        {
+            HighScore = 0;
+        }
+
         SetStageDatas();
         StagePlacement = Stages[stageNum].CreateStage();
     }
@@ -42,7 +53,8 @@ public partial class GameRuleManegenent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(isGameDoing)
+            gameTimer += Time.deltaTime;
     }
 
     void StageReset()
@@ -63,6 +75,20 @@ public partial class GameRuleManegenent : MonoBehaviour
         {
             item.SetActive(true);
         }
+
+        gameTimer = 0;
+    }
+
+    void NextStage()
+    {
+        stageNum++;
+        foreach(var item in StagePlacement)
+        {
+            Destroy(item);
+        }
+
+        StagePlacement = Stages[stageNum].CreateStage();
+        StageReset();
     }
 
     public void SendMiss()
@@ -72,5 +98,16 @@ public partial class GameRuleManegenent : MonoBehaviour
         water.GetComponent<WaterScript>().enabled = false;
 
         Invoke(nameof(StageReset), 1f);
+    }
+
+    public void SendClear()
+    {
+        isGameDoing = false;
+        player.GetComponent<PlayerController>().enabled = false;
+        water.GetComponent<WaterScript>().enabled = false;
+
+        Scoring();
+
+        Invoke(nameof(NextStage), 1f);
     }
 }

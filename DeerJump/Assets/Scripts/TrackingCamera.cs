@@ -16,6 +16,8 @@ public class TrackingCamera : MonoBehaviour
 
     void Update()
     {
+        if (!GameRuleManegenent.isGameDoing) return;
+
         float difference = player.position.y + shiftYPos - transform.position.y;
         if (difference > 0)
         {
