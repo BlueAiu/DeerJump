@@ -45,9 +45,13 @@ public partial class GameRuleManegenent : MonoBehaviour
         {
             HighScore = 0;
         }
+        scoreText.text = Score.ToString();
+        hiScoreText.text = HighScore.ToString();
 
         SetStageDatas();
         StagePlacement = Stages[stageNum].CreateStage();
+
+        ChangePauseMode();
     }
 
     // Update is called once per frame
@@ -55,6 +59,10 @@ public partial class GameRuleManegenent : MonoBehaviour
     {
         if(isGameDoing)
             gameTimer += Time.deltaTime;
+        TimerWrite();
+
+        if (InputManeger.IsPauseButton())
+            ChangePauseMode();
     }
 
     void StageReset()
@@ -69,7 +77,7 @@ public partial class GameRuleManegenent : MonoBehaviour
         waterScript.enabled = true;
         waterScript.Init();
 
-        camera.position = new Vector3(0, 2, -10);
+        camera.position = new Vector3(1, 2, -10);
 
         foreach (var item in StagePlacement)
         {
@@ -77,6 +85,9 @@ public partial class GameRuleManegenent : MonoBehaviour
         }
 
         gameTimer = 0;
+
+        SetUIsFalse();
+        stageText.text = "STAGE " + (stageNum + 1).ToString().PadLeft(2);
     }
 
     void NextStage()
@@ -97,6 +108,8 @@ public partial class GameRuleManegenent : MonoBehaviour
         player.GetComponent<PlayerController>().enabled = false;
         water.GetComponent<WaterScript>().enabled = false;
 
+        missUI.SetActive(true);
+
         Invoke(nameof(StageReset), 1f);
     }
 
@@ -106,6 +119,7 @@ public partial class GameRuleManegenent : MonoBehaviour
         player.GetComponent<PlayerController>().enabled = false;
         water.GetComponent<WaterScript>().enabled = false;
 
+        goalUI.SetActive(true);
         Scoring();
 
         Invoke(nameof(NextStage), 1f);

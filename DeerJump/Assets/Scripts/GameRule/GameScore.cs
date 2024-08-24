@@ -28,12 +28,15 @@ public partial class GameRuleManegenent : MonoBehaviour
         int _clearScore = clearScore[ScoreNum()];
         int _timeScore = TimeScore();
 
-        Debug.Log(_timeScore);
+        stageBonusText.text = "STAGE BONUS  " + _clearScore.ToString().PadLeft(4);
+        timeBonusText.text = "TIME    BONUS  " + _timeScore.ToString().PadLeft(4);
 
         Score += _clearScore + _timeScore;
+        scoreText.text = Score.ToString();
 
         HighScore = Mathf.Max(HighScore, Score);
         PlayerPrefs.SetInt("HighScore", HighScore);
+        hiScoreText.text = HighScore.ToString();
 
         UnityroomApiClient.Instance.SendScore(1, Score, ScoreboardWriteMode.HighScoreDesc);
     }

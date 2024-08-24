@@ -20,4 +20,9 @@ public static class InputManeger
         value = Mathf.Clamp(value, -1f, 1f);
         return value;
     }
+
+    public static bool IsPauseButton()
+    {
+        return Keyboard.current.pKey.wasPressedThisFrame;
+    }
 }
