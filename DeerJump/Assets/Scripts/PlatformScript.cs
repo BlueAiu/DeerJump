@@ -40,6 +40,10 @@ public class PlatformScript : MonoBehaviour
     [Tooltip("èÊÇ¡ÇƒÇÈÉvÉåÉCÉÑÅ[ÇìÆÇ©Ç∑ë¨Ç≥")]
     [SerializeField] public float movePlayerVelocity = 0f;
 
+    float actionTimer = 0;
+    [SerializeField] Sprite[] beltSprites;
+    [SerializeField] float beltSpritePeriod = 0.3f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,6 +72,11 @@ public class PlatformScript : MonoBehaviour
         {
             moveDirection = -moveDirection;
         }
+
+        if(type == PlatformType.Belt)
+        {
+            Belting();
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -93,5 +102,14 @@ public class PlatformScript : MonoBehaviour
         this.moveSpeed = platform.moveSpeed;
         this.movePlayerVelocity = platform.beltSpeed;
         this.moveRange = range;
+    }
+
+    void Belting()
+    {
+        if (!GameRuleManegenent.isGameDoing) return;
+
+        actionTimer += Time.deltaTime;
+        var beltLate = actionTimer / (movePlayerVelocity * beltSpritePeriod) % beltSprites.Length;
+        GetComponent<SpriteRenderer>().sprite = beltSprites[Mathf.FloorToInt(beltLate)];
     }
 }

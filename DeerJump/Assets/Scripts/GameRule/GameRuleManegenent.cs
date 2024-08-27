@@ -180,7 +180,7 @@ public partial class GameRuleManegenent : MonoBehaviour
         audio.Play();
 
         stageNum = 0 - 1;
-        Invoke(nameof(NextStage), 1f);
+        Invoke(nameof(NextStage), allClearTime);
     }
 
     void Continuing()

@@ -1618,13 +1618,14 @@ MonoBehaviour:
   - {fileID: 330611701, guid: 0fda042bd7665744699eedcb51fb78d2, type: 3}
   - {fileID: -913865756, guid: 0fda042bd7665744699eedcb51fb78d2, type: 3}
   - {fileID: -1534365110, guid: 0fda042bd7665744699eedcb51fb78d2, type: 3}
-  stageNum: 24
+  stageNum: 10
   gameTimer: 0
   allClear: {fileID: 8300000, guid: adeb9af2b2ed61c47b3b50b24bf5f8a5, type: 3}
   gameover: {fileID: 8300000, guid: 9377fb46990b58548b77c849f4e753cd, type: 3}
   goalTime: 1.5
   allClearTime: 2
   missTime: 1
+  remainLives: 3
   clearScore: 2c01000058020000e8030000
   timeScoreBase: e8030000d0070000ac0d0000
   timeLimit: 40

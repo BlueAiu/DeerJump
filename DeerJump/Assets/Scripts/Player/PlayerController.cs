@@ -68,6 +68,9 @@ public partial class PlayerController : MonoBehaviour
 
     public void Init()
     {
+        chargeTime = 0f;
+        chargeLate = 0f;
+
         transform.position = initPos;
         transform.rotation = Quaternion.identity;
 
@@ -103,6 +106,8 @@ public partial class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!GameRuleManegenent.isGameDoing) return;
+
         velocity_ = rigidbody.velocity;
 
         VerticalVelocity();

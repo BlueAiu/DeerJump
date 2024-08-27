@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum ItemType
@@ -25,6 +26,17 @@ public class StageInfomation
     public List<GameObject> CreateStage()
     {
         var stage = new List<GameObject>();
+
+        System.Random random = new();
+        int n = platforms.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = random.Next(n + 1);
+            var tmp = platforms[k];
+            platforms[k] = platforms[n];
+            platforms[n] = tmp;
+        }
 
         for (int i = 0;i < platforms.Count; i++)
         {

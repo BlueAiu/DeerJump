@@ -197,3 +197,8 @@ MonoBehaviour:
   moveSpeed: 0
   moveRange: 0
   movePlayerVelocity: 0
+  beltSprites:
+  - {fileID: 330611701, guid: 0fda042bd7665744699eedcb51fb78d2, type: 3}
+  - {fileID: -913865756, guid: 0fda042bd7665744699eedcb51fb78d2, type: 3}
+  - {fileID: -1534365110, guid: 0fda042bd7665744699eedcb51fb78d2, type: 3}
+  beltSpritePeriod: 0.02
