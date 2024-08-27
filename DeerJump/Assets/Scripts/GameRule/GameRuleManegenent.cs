@@ -25,10 +25,23 @@ public partial class GameRuleManegenent : MonoBehaviour
 
     public float gameTimer;
 
+    new AudioSource audio;
+    [SerializeField] AudioClip allClear;
+    [SerializeField] AudioClip gameover;
+
+    [SerializeField] float goalTime = 1.5f;
+    [SerializeField] float allClearTime = 2f;
+    [SerializeField] float missTime = 1f;
+
+    [SerializeField] int remainLives;
+    bool isGameOvering = false;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        audio = GetComponent<AudioSource>();
+
         StageInfomation.platform = platformPrefab;
         StageInfomation.item = itemPrefab;
         StageInfomation.itemSprites = itemSprites;
@@ -52,6 +65,9 @@ public partial class GameRuleManegenent : MonoBehaviour
         StagePlacement = Stages[stageNum].CreateStage();
 
         ChangePauseMode();
+
+        remainLives = 3;
+        RemainLiving();
     }
 
     // Update is called once per frame
@@ -63,6 +79,8 @@ public partial class GameRuleManegenent : MonoBehaviour
 
         if (InputManeger.IsPauseButton())
             ChangePauseMode();
+
+        Continuing();
     }
 
     void StageReset()
@@ -110,7 +128,17 @@ public partial class GameRuleManegenent : MonoBehaviour
 
         missUI.SetActive(true);
 
-        Invoke(nameof(StageReset), 1f);
+        remainLives--;
+        RemainLiving();
+
+        if (remainLives == 0)
+        {
+            Invoke(nameof(GameOver), missTime);
+        }
+        else
+        {
+            Invoke(nameof(StageReset), missTime);
+        }
     }
 
     public void SendClear()
@@ -122,6 +150,57 @@ public partial class GameRuleManegenent : MonoBehaviour
         goalUI.SetActive(true);
         Scoring();
 
+        if (stageNum == Stages.Length - 1)
+        {
+            Invoke(nameof(AllClear), goalTime);
+        }
+        else
+        {
+            Invoke(nameof(NextStage), goalTime);
+        }
+    }
+
+    void GameOver()
+    {
+        missUI.SetActive(false);
+        gameoverUI.SetActive(true);
+
+        audio.clip = gameover;
+        audio.Play();
+
+        isGameOvering = true;
+    }
+
+    void AllClear()
+    {
+        goalUI.SetActive(false);
+        allClearUI.SetActive(true);
+
+        audio.clip = allClear;
+        audio.Play();
+
+        stageNum = 0 - 1;
         Invoke(nameof(NextStage), 1f);
+    }
+
+    void Continuing()
+    {
+        if (!isGameOvering) return;
+        if (pauseUI.activeSelf) return;
+
+        if (InputManeger.IsDecision())
+        {
+            Score = 0;
+            remainLives = 3;
+            stageNum = Mathf.FloorToInt(stageNum / 10) * 10 - 1;
+            NextStage();
+        }
+        else if(InputManeger.IsCanceled())
+        {
+            Score = 0;
+            remainLives = 3;
+            stageNum = 0 - 1;
+            NextStage();
+        }
     }
 }

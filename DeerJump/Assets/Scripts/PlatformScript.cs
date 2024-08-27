@@ -27,7 +27,7 @@ public struct PlatformInfo
 
 public class PlatformScript : MonoBehaviour
 {
-    [SerializeField] public static Sprite[] sprites;
+    public static Sprite[] sprites;
 
     [SerializeField] public PlatformType type;
     [SerializeField] PhysicsMaterial2D noneSlip;
@@ -74,9 +74,15 @@ public class PlatformScript : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            if (collision.gameObject.GetComponent<PlayerController>().isground)
+            var playerCon = collision.gameObject.GetComponent<PlayerController>();
+            if (playerCon.isground)
             {
-                collision.transform.position += new Vector3(movePlayerVelocity * moveDirection * Time.deltaTime, 0, 0);
+                var player = collision.transform;
+                player.position += new Vector3(movePlayerVelocity * moveDirection * Time.deltaTime, 0, 0);
+
+                float posLimit = playerCon.PositionLimit;
+                player.position = new Vector3
+                    (Mathf.Clamp(player.position.x, -posLimit, posLimit), player.position.y, player.position.z);
             }
         }
     }

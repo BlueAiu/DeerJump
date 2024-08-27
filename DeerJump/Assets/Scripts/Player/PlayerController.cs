@@ -61,6 +61,9 @@ public partial class PlayerController : MonoBehaviour
 
     [SerializeField] GameObject itemParticle;
 
+    public float PositionLimit { get { return warpPosition; } }
+    bool didMiss = false;
+
 
 
     public void Init()
@@ -82,6 +85,8 @@ public partial class PlayerController : MonoBehaviour
 
         itemParticle.SetActive(false);
         rigidbody.bodyType = RigidbodyType2D.Dynamic;
+
+        didMiss = false;
     }
 
     // Start is called before the first frame update
@@ -261,6 +266,9 @@ public partial class PlayerController : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Water"))
         {
+            if (didMiss) return;
+            didMiss = true;
+
             spriteRenderer.sprite = whiteDeer;
             spriteRenderer.color = Color.white;
             transform.localEulerAngles = new Vector3(0, 0, -90);

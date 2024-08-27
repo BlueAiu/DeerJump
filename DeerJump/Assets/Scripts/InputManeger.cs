@@ -25,4 +25,14 @@ public static class InputManeger
     {
         return Keyboard.current.pKey.wasPressedThisFrame;
     }
+
+    public static bool IsDecision()
+    {
+        return Keyboard.current.zKey.wasPressedThisFrame;
+    }
+
+    public static bool IsCanceled() 
+    {
+        return Keyboard.current.xKey.wasPressedThisFrame;
+    }
 }

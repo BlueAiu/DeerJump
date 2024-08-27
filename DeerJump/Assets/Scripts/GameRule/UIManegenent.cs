@@ -11,6 +11,7 @@ public partial class GameRuleManegenent : MonoBehaviour
     [SerializeField] GameObject goalUI;
     [SerializeField] GameObject allClearUI;
     [SerializeField] GameObject pauseUI;
+    [SerializeField] GameObject remainLivesUI;
 
     [SerializeField] TMP_Text hiScoreText;
     [SerializeField] TMP_Text scoreText;
@@ -48,5 +49,11 @@ public partial class GameRuleManegenent : MonoBehaviour
             pauseUI.SetActive(true);
             Time.timeScale = 0;
         }
+    }
+
+    void RemainLiving()
+    {
+        var trans = remainLivesUI.GetComponent<RectTransform>();
+        trans.sizeDelta = new Vector2(58 * remainLives, trans.sizeDelta.y);
     }
 }
