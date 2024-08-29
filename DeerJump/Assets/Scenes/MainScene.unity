@@ -1618,7 +1618,7 @@ MonoBehaviour:
   - {fileID: 330611701, guid: 0fda042bd7665744699eedcb51fb78d2, type: 3}
   - {fileID: -913865756, guid: 0fda042bd7665744699eedcb51fb78d2, type: 3}
   - {fileID: -1534365110, guid: 0fda042bd7665744699eedcb51fb78d2, type: 3}
-  stageNum: 10
+  stageNum: 13
   gameTimer: 0
   allClear: {fileID: 8300000, guid: adeb9af2b2ed61c47b3b50b24bf5f8a5, type: 3}
   gameover: {fileID: 8300000, guid: 9377fb46990b58548b77c849f4e753cd, type: 3}
@@ -1641,6 +1641,10 @@ MonoBehaviour:
   timerText: {fileID: 221746682}
   stageBonusText: {fileID: 566746003}
   timeBonusText: {fileID: 203323846}
+  backgrounds:
+  - {r: 0.22352941, g: 0.41568628, b: 0.7176471, a: 0}
+  - {r: 0.17230324, g: 0.55345905, b: 0.4516532, a: 0}
+  - {r: 0.25908777, g: 0.58659893, b: 0.6289307, a: 0}
 --- !u!4 &420622287
 Transform:
   m_ObjectHideFlags: 0

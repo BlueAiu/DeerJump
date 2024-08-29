@@ -20,6 +20,8 @@ public partial class GameRuleManegenent : MonoBehaviour
     [SerializeField] TMP_Text stageBonusText;
     [SerializeField] TMP_Text timeBonusText;
 
+    [SerializeField] Color[] backgrounds;
+
     void TimerWrite()
     {
         float min = Mathf.Floor(gameTimer / 60);
@@ -55,5 +57,10 @@ public partial class GameRuleManegenent : MonoBehaviour
     {
         var trans = remainLivesUI.GetComponent<RectTransform>();
         trans.sizeDelta = new Vector2(58 * remainLives, trans.sizeDelta.y);
+    }
+
+    void BackgroundColoring()
+    {
+        camera.gameObject.GetComponent<Camera>().backgroundColor = backgrounds[Mathf.FloorToInt(stageNum / 10)];
     }
 }

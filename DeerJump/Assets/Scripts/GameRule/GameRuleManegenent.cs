@@ -34,6 +34,7 @@ public partial class GameRuleManegenent : MonoBehaviour
     [SerializeField] float missTime = 1f;
 
     [SerializeField] int remainLives;
+    const int initLives = 3;
     bool isGameOvering = false;
 
 
@@ -66,7 +67,7 @@ public partial class GameRuleManegenent : MonoBehaviour
 
         ChangePauseMode();
 
-        remainLives = 3;
+        remainLives = initLives;
         RemainLiving();
     }
 
@@ -106,6 +107,7 @@ public partial class GameRuleManegenent : MonoBehaviour
 
         SetUIsFalse();
         stageText.text = "STAGE " + (stageNum + 1).ToString().PadLeft(2);
+        BackgroundColoring();
     }
 
     void NextStage()
@@ -179,7 +181,10 @@ public partial class GameRuleManegenent : MonoBehaviour
         audio.clip = allClear;
         audio.Play();
 
+        Score = 0;
+        remainLives = initLives;
         stageNum = 0 - 1;
+
         Invoke(nameof(NextStage), allClearTime);
     }
 
@@ -191,15 +196,17 @@ public partial class GameRuleManegenent : MonoBehaviour
         if (InputManeger.IsDecision())
         {
             Score = 0;
-            remainLives = 3;
+            remainLives = initLives;
             stageNum = Mathf.FloorToInt(stageNum / 10) * 10 - 1;
+
             NextStage();
         }
         else if(InputManeger.IsCanceled())
         {
             Score = 0;
-            remainLives = 3;
+            remainLives = initLives;
             stageNum = 0 - 1;
+
             NextStage();
         }
     }

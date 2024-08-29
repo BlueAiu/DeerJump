@@ -7,6 +7,8 @@ public partial class GameRuleManegenent : MonoBehaviour
 {
     static public int Score = 0;
     static public int HighScore = 0;
+    int liveScore = 0;
+    const int liveBonus = 10000;
     [Header("Score")]
     [SerializeField] int[] clearScore = new int[3];
     [SerializeField] int[] timeScoreBase = new int[3];
@@ -33,6 +35,13 @@ public partial class GameRuleManegenent : MonoBehaviour
 
         Score += _clearScore + _timeScore;
         scoreText.text = Score.ToString();
+
+        liveScore += _clearScore + _timeScore;
+        if(liveScore >= liveBonus)
+        {
+            remainLives++;
+            liveScore -= liveBonus;
+        }
 
         HighScore = Mathf.Max(HighScore, Score);
         PlayerPrefs.SetInt("HighScore", HighScore);
