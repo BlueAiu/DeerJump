@@ -108,6 +108,7 @@ public partial class GameRuleManegenent : MonoBehaviour
         SetUIsFalse();
         stageText.text = "STAGE " + (stageNum + 1).ToString().PadLeft(2);
         BackgroundColoring();
+        RemainLiving();
     }
 
     void NextStage()

@@ -1610,7 +1610,7 @@ MonoBehaviour:
   - {fileID: -1827955295, guid: 0fda042bd7665744699eedcb51fb78d2, type: 3}
   - {fileID: 1816217821, guid: 0fda042bd7665744699eedcb51fb78d2, type: 3}
   goal: {fileID: 3573203615280629175}
-  gameSizeWidth: 8
+  gameSizeWidth: 7
   platformSsprites:
   - {fileID: -409131793, guid: 0fda042bd7665744699eedcb51fb78d2, type: 3}
   - {fileID: -208051405, guid: 0fda042bd7665744699eedcb51fb78d2, type: 3}
@@ -1618,7 +1618,7 @@ MonoBehaviour:
   - {fileID: 330611701, guid: 0fda042bd7665744699eedcb51fb78d2, type: 3}
   - {fileID: -913865756, guid: 0fda042bd7665744699eedcb51fb78d2, type: 3}
   - {fileID: -1534365110, guid: 0fda042bd7665744699eedcb51fb78d2, type: 3}
-  stageNum: 13
+  stageNum: 24
   gameTimer: 0
   allClear: {fileID: 8300000, guid: adeb9af2b2ed61c47b3b50b24bf5f8a5, type: 3}
   gameover: {fileID: 8300000, guid: 9377fb46990b58548b77c849f4e753cd, type: 3}
@@ -1644,7 +1644,7 @@ MonoBehaviour:
   backgrounds:
   - {r: 0.22352941, g: 0.41568628, b: 0.7176471, a: 0}
   - {r: 0.17230324, g: 0.55345905, b: 0.4516532, a: 0}
-  - {r: 0.25908777, g: 0.58659893, b: 0.6289307, a: 0}
+  - {r: 0.23586877, g: 0.67757577, b: 0.84276724, a: 0}
 --- !u!4 &420622287
 Transform:
   m_ObjectHideFlags: 0
@@ -2074,9 +2074,10 @@ MonoBehaviour:
   jumpPower: 9.5
   chargeLimit: 0.8
   chargeMin: 0.05
-  acceleration: 7
+  jumpableTime: 0
+  acceleration: 10
   chargingAccelerateLate: 0.5
-  limitSpeed: 5
+  limitSpeed: 4
   warpPosition: 3.5
   highJumpPower: 13
   otherStateDuration: 10

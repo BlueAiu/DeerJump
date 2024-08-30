@@ -35,7 +35,8 @@ public partial class PlayerController : MonoBehaviour
     [SerializeField] float chargeMin = 0.1f;
     float chargeLate = 0f;
 
-    int jumpableTime = 0;
+    [Header("look only")]
+    [SerializeField] int jumpableTime = 0;
     int maxJumpableTime = 1;
 
 
@@ -62,7 +63,7 @@ public partial class PlayerController : MonoBehaviour
     [SerializeField] GameObject itemParticle;
 
     public float PositionLimit { get { return warpPosition; } }
-    bool didMiss = false;
+    bool isHited = false;
 
 
 
@@ -89,7 +90,7 @@ public partial class PlayerController : MonoBehaviour
         itemParticle.SetActive(false);
         rigidbody.bodyType = RigidbodyType2D.Dynamic;
 
-        didMiss = false;
+        isHited = false;
     }
 
     // Start is called before the first frame update
@@ -271,8 +272,8 @@ public partial class PlayerController : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Water"))
         {
-            if (didMiss) return;
-            didMiss = true;
+            if (isHited) return;
+            isHited = true;
 
             spriteRenderer.sprite = whiteDeer;
             spriteRenderer.color = Color.white;
@@ -283,6 +284,9 @@ public partial class PlayerController : MonoBehaviour
         }
         else if (collision.gameObject.name == "Goal")
         {
+            if (isHited) return;
+            isHited = true;
+
             spriteRenderer.color = Color.white;
             rigidbody.bodyType = RigidbodyType2D.Static;
             PlaySE(AudioType.Clear);
