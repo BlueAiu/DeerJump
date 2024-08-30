@@ -19,6 +19,7 @@ public partial class GameRuleManegenent : MonoBehaviour
 
     [SerializeField] Sprite[] platformSsprites;
 
+    [Header("StageNum")]
     [SerializeField] int stageNum = 0;
     public StageInfomation[] Stages { get; set; } = new StageInfomation[25];
     public List<GameObject> StagePlacement { get; set; } = new();
@@ -183,6 +184,7 @@ public partial class GameRuleManegenent : MonoBehaviour
         audio.Play();
 
         Score = 0;
+        scoreText.text = "0";
         remainLives = initLives;
         stageNum = 0 - 1;
 
@@ -197,6 +199,7 @@ public partial class GameRuleManegenent : MonoBehaviour
         if (InputManeger.IsDecision())
         {
             Score = 0;
+            scoreText.text = "0";
             remainLives = initLives;
             stageNum = Mathf.FloorToInt(stageNum / 10) * 10 - 1;
 
@@ -205,6 +208,7 @@ public partial class GameRuleManegenent : MonoBehaviour
         else if(InputManeger.IsCanceled())
         {
             Score = 0;
+            scoreText.text = "0";
             remainLives = initLives;
             stageNum = 0 - 1;
 
