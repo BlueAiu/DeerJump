@@ -56,7 +56,11 @@ public class PlatformScript : MonoBehaviour
         {
             GetComponent<BoxCollider2D>().sharedMaterial = fullSlip;
         }
-        else if (type == PlatformType.Belt && Random.value > 0.5f)
+        else if(type == PlatformType.Normal)
+        {
+            GetComponent<BoxCollider2D>().sharedMaterial = noneSlip;
+        }
+        if (type == PlatformType.Belt && Random.value > 0.5f)
         {
             moveDirection = -1f;
             GetComponent<SpriteRenderer>().flipX = true;
@@ -81,17 +85,22 @@ public class PlatformScript : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if(collision.gameObject.CompareTag("Player") && movePlayerVelocity > 0)
         {
             var playerCon = collision.gameObject.GetComponent<PlayerController>();
-            if (playerCon.isground)
+            if (playerCon.Isground)
             {
-                var player = collision.transform;
-                player.position += new Vector3(movePlayerVelocity * moveDirection * Time.deltaTime, 0, 0);
+                var playerTrans = playerCon.transform;
+                var playerRb = collision.gameObject.GetComponent<Rigidbody2D>();
+
+                //var movement = Vector2.right * (movePlayerVelocity * moveDirection * Time.deltaTime);
+                playerRb.AddForce(Vector2.right * (movePlayerVelocity * moveDirection - playerRb.velocity.x), ForceMode2D.Impulse);
+                //playerRb.velocity = new Vector2(movePlayerVelocity * moveDirection, playerRb.velocity.y);
+                //playerTrans.position += Vector3.right * (movePlayerVelocity * moveDirection * Time.deltaTime);
 
                 float posLimit = playerCon.PositionLimit;
-                player.position = new Vector3
-                    (Mathf.Clamp(player.position.x, -posLimit, posLimit), player.position.y, player.position.z);
+                playerTrans.position = new Vector3
+                    (Mathf.Clamp(playerTrans.position.x, -posLimit, posLimit), playerTrans.position.y, playerTrans.position.z);
             }
         }
     }

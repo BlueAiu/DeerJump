@@ -8,10 +8,12 @@ public partial class GameRuleManegenent : MonoBehaviour
     {
         for(int i = 0; i < num; i++)
         {
-            var platform = new PlatformInfo();
-            platform.type = type;
-            platform.moveSpeed = moveSpeed;
-            platform.beltSpeed = beltSpeed;
+            var platform = new PlatformInfo
+            {
+                type = type,
+                moveSpeed = moveSpeed,
+                beltSpeed = beltSpeed
+            };
             stageInfo.platforms.Add(platform);
         }
     }

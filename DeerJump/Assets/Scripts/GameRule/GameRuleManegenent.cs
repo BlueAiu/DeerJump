@@ -202,6 +202,7 @@ public partial class GameRuleManegenent : MonoBehaviour
             scoreText.text = "0";
             remainLives = initLives;
             stageNum = Mathf.FloorToInt(stageNum / 10) * 10 - 1;
+            isGameOvering = false;
 
             NextStage();
         }
@@ -211,6 +212,7 @@ public partial class GameRuleManegenent : MonoBehaviour
             scoreText.text = "0";
             remainLives = initLives;
             stageNum = 0 - 1;
+            isGameOvering = false;
 
             NextStage();
         }

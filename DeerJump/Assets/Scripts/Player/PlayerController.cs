@@ -14,7 +14,7 @@ public partial class PlayerController : MonoBehaviour
 {
     new Rigidbody2D rigidbody;
     Vector2 velocity_;
-    public bool isground { get; private set; } = true;
+    public bool Isground { get; private set; } = true;
     PlayerState state = PlayerState.Normal;
     float stateTimer = 0f;
     Vector3 initPos;
@@ -144,7 +144,7 @@ public partial class PlayerController : MonoBehaviour
 
                 PlaySE(AudioType.Jump);
 
-                if(!isground)
+                if(!Isground)
                 {
                     jumpableTime--;
                 }
@@ -157,7 +157,7 @@ public partial class PlayerController : MonoBehaviour
 
     void HorizontalVelocity()
     {
-        if (!isground)
+        if (!Isground)
         {
             float fastItemLate = state == PlayerState.FastFalling ? fastXMoveLate : 1;
             float chargingLate = InputManeger.IsCharging() ? chargingAccelerateLate : 1;
@@ -191,7 +191,7 @@ public partial class PlayerController : MonoBehaviour
             stateTimer = 0;
 
             maxJumpableTime = 1;
-            if(!isground)
+            if(!Isground)
                 jumpableTime--;
 
             currentJumpPower = jumpPower;
@@ -209,18 +209,28 @@ public partial class PlayerController : MonoBehaviour
         {
             if (rigidbody.velocity.y <= 0)
             {
-                isground = true;
+                Isground = true;
                 jumpableTime = maxJumpableTime;
+
+                if (collision.gameObject.GetComponent<PlatformScript>().type != PlatformType.Ice)
+                {
+                    rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0);
+                }
             }
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Platform") && isground)
+        if(collision.gameObject.CompareTag("Platform") && Isground)
         {
-            isground = false;
+            Isground = false;
             jumpableTime--;
+
+            if(collision.gameObject.GetComponent<PlatformScript>().type != PlatformType.Ice)
+            {
+                rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0);
+            }
         }
     }
 

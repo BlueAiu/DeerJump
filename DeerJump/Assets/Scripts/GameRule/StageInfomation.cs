@@ -33,9 +33,7 @@ public class StageInfomation
         {
             n--;
             int k = random.Next(n + 1);
-            var tmp = platforms[k];
-            platforms[k] = platforms[n];
-            platforms[n] = tmp;
+            (platforms[n], platforms[k]) = (platforms[k], platforms[n]);
         }
 
         for (int i = 0;i < platforms.Count; i++)
