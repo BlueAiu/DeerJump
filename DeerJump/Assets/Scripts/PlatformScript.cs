@@ -47,10 +47,10 @@ public class PlatformScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(moveSpeed != 0)
-        {
-            movePlayerVelocity = moveSpeed;
-        }
+        //if(moveSpeed != 0)
+        //{
+        //    movePlayerVelocity = moveSpeed;
+        //}
 
         if (type == PlatformType.Ice)
         {

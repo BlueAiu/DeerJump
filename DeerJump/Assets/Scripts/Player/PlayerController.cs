@@ -109,6 +109,8 @@ public partial class PlayerController : MonoBehaviour
     {
         if (!GameRuleManegenent.isGameDoing) return;
 
+        PlatformMoving();
+
         velocity_ = rigidbody.velocity;
 
         VerticalVelocity();
@@ -119,7 +121,6 @@ public partial class PlayerController : MonoBehaviour
         StateChanger();
 
         Shrinking();
-
         FullChargeColor();
     }
 
@@ -142,6 +143,7 @@ public partial class PlayerController : MonoBehaviour
                 float thisJumpPower = currentJumpPower * Mathf.Sqrt(chargeLate);
                 velocity_.y = Mathf.Min(Mathf.Max(thisJumpPower, velocity_.y + thisJumpPower), currentJumpPower);
 
+                transform.parent = null;
                 PlaySE(AudioType.Jump);
 
                 if(!Isground)
@@ -212,9 +214,14 @@ public partial class PlayerController : MonoBehaviour
                 Isground = true;
                 jumpableTime = maxJumpableTime;
 
-                if (collision.gameObject.GetComponent<PlatformScript>().type != PlatformType.Ice)
+                var platformType = collision.gameObject.GetComponent<PlatformScript>().type;
+                if (platformType != PlatformType.Ice)
                 {
                     rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0);
+                }
+                if(platformType == PlatformType.Move)
+                {
+                    transform.parent = collision.transform;
                 }
             }
         }
@@ -226,6 +233,8 @@ public partial class PlayerController : MonoBehaviour
         {
             Isground = false;
             jumpableTime--;
+
+            transform.parent = null;
 
             if(collision.gameObject.GetComponent<PlatformScript>().type != PlatformType.Ice)
             {
@@ -285,6 +294,7 @@ public partial class PlayerController : MonoBehaviour
             if (isHited) return;
             isHited = true;
 
+            transform.parent = null;
             spriteRenderer.sprite = whiteDeer;
             spriteRenderer.color = Color.white;
             transform.localEulerAngles = new Vector3(0, 0, -90);
@@ -304,4 +314,13 @@ public partial class PlayerController : MonoBehaviour
         }
     }
     
+    void PlatformMoving()
+    {
+        if(transform.parent != null)
+        {
+            transform.position = new Vector3(
+                Mathf.Clamp(transform.position.x, -warpPosition, warpPosition),
+                transform.position.y, transform.position.z);
+        }
+    }
 }
