@@ -108,6 +108,7 @@ public partial class PlayerController : MonoBehaviour
     void Update()
     {
         if (!GameRuleManegenent.isGameDoing) return;
+        if (Time.timeScale == 0) return;
 
         PlatformMoving();
 
@@ -279,7 +280,8 @@ public partial class PlayerController : MonoBehaviour
                 stateTimer = 0f;
 
                 maxJumpableTime = 1;
-                jumpableTime--;
+                if (!Isground)
+                    jumpableTime--;
 
                 currentJumpPower = fastJumpPower;
                 rigidbody.gravityScale = fastGravityScale;
