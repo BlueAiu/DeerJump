@@ -8,10 +8,13 @@ public partial class PlayerController : MonoBehaviour
     [Tooltip("Ç«Ç±Ç‹Ç≈èkÇﬁÇ©")]
     [SerializeField] float shrinkSize = 0.5f;
 
-    [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] SpriteRenderer[] renderers;
     [SerializeField] float ColorChangePeriod = 0.2f;
-    [SerializeField] Sprite normal;
-    [SerializeField] Sprite whiteDeer;
+
+    [SerializeField] GameObject whiteDeer;
+    [SerializeField] GameObject face;
+    [SerializeField] GameObject horn;
+    [SerializeField] GameObject longHorn;
 
     void Shrinking()
     {
@@ -24,20 +27,26 @@ public partial class PlayerController : MonoBehaviour
         //transform.position += new Vector3(0, diffSize, 0);
     }
 
+    public Color BodyColor
+    {
+        set
+        {
+            foreach(var r in renderers)
+            {
+                r.color = value;
+            }
+        }
+    }
+
     void FullChargeColor()
     {
-        if (spriteRenderer == null)
-        {
-            spriteRenderer = transform.GetComponentInChildren<SpriteRenderer>();
-        }
-
         if (chargeLate >= 1 && Time.time % ColorChangePeriod < ColorChangePeriod / 2)
         {
-            spriteRenderer.color = Color.yellow;
+            BodyColor = Color.yellow;
         }
         else
         {
-            spriteRenderer.color = Color.white;
+            BodyColor = Color.white;
         }
     }
 }

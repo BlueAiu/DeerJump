@@ -76,19 +76,14 @@ public partial class PlayerController : MonoBehaviour
         transform.position = initPos;
         transform.rotation = Quaternion.identity;
 
-        spriteRenderer.sprite = normal;
+        face.SetActive(true);
+        whiteDeer.SetActive(false);
         currentJumpPower = jumpPower;
-        
-        state = PlayerState.Normal;
-        stateTimer = 0;
 
-        maxJumpableTime = 1;
+        StateReset();
+
         jumpableTime = maxJumpableTime;
 
-        currentJumpPower = jumpPower;
-        rigidbody.gravityScale = 1f;
-
-        itemParticle.SetActive(false);
         rigidbody.bodyType = RigidbodyType2D.Dynamic;
 
         isHited = false;
@@ -201,6 +196,9 @@ public partial class PlayerController : MonoBehaviour
         currentJumpPower = jumpPower;
         rigidbody.gravityScale = 1f;
 
+        horn.SetActive(true);
+        longHorn.SetActive(false);
+
         itemParticle.SetActive(false);
     }
 
@@ -265,7 +263,7 @@ public partial class PlayerController : MonoBehaviour
 
             var itemName = collision.gameObject.name;
 
-            if (itemName.Contains("HighJump"))
+            if (itemName.Contains(ItemType.HighJump.ToString()))
             {
                 if (state != PlayerState.FastFalling)
                     rigidbody.velocity = new Vector2(rigidbody.velocity.x, highJumpPower);
@@ -274,34 +272,37 @@ public partial class PlayerController : MonoBehaviour
 
                 PlaySE(AudioType.HighJump);
             }
-            else if (itemName.Contains("DoubleJump"))
+            else if (itemName.Contains(ItemType.DoubleJump.ToString()))
             {
+                StateReset();
                 state = PlayerState.DoubleJump;
-                stateTimer = 0f;
 
                 maxJumpableTime = 2;
                 jumpableTime++;
 
-                currentJumpPower = jumpPower;
-                rigidbody.gravityScale = 1f;
-
                 itemParticle.SetActive(true);
             }
-            else if (itemName.Contains("FastFall"))
+            else if (itemName.Contains(ItemType.FastFall.ToString()))
             {
+                StateReset();
                 state = PlayerState.FastFalling;
-                stateTimer = 0f;
-
-                maxJumpableTime = 1;
-                if (!Isground)
-                    jumpableTime--;
 
                 currentJumpPower = fastJumpPower;
                 rigidbody.gravityScale = fastGravityScale;
 
                 itemParticle.SetActive(true);
             }
-            else if (itemName.Contains("ConstSpeed"))
+            else if (itemName.Contains(ItemType.LongHorn.ToString()))
+            {
+                StateReset();
+                state = PlayerState.LongHorn;
+
+                horn.SetActive(false);
+                longHorn.SetActive(true);
+
+                itemParticle.SetActive(true);
+            }
+            else if (itemName.Contains(ItemType.ConstSpeed.ToString()))
             {
                 StateReset();
                 state = PlayerState.ConstSpeed;
@@ -316,8 +317,11 @@ public partial class PlayerController : MonoBehaviour
             isHited = true;
 
             transform.parent = null;
-            spriteRenderer.sprite = whiteDeer;
-            spriteRenderer.color = Color.white;
+            face.SetActive(false);
+            horn.SetActive(false);
+            longHorn.SetActive(false);
+            whiteDeer.SetActive(true);
+
             transform.localEulerAngles = new Vector3(0, 0, -90);
             rigidbody.bodyType = RigidbodyType2D.Static;
             PlaySE(AudioType.Miss);
@@ -328,7 +332,7 @@ public partial class PlayerController : MonoBehaviour
             if (isHited) return;
             isHited = true;
 
-            spriteRenderer.color = Color.white;
+            BodyColor = Color.white;
             rigidbody.bodyType = RigidbodyType2D.Static;
             PlaySE(AudioType.Clear);
             gameRuleManeger.SendClear();
