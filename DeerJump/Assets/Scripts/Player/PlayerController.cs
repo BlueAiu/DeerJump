@@ -7,7 +7,8 @@ using UnityEngine.InputSystem;
 
 enum PlayerState
 {
-    Normal, DoubleJump, FastFalling
+    Normal, DoubleJump, FastFalling,
+    LongHorn, WideSight, ConstSpeed
 }
 
 public partial class PlayerController : MonoBehaviour
@@ -162,12 +163,19 @@ public partial class PlayerController : MonoBehaviour
     {
         if (!Isground)
         {
-            float fastItemLate = state == PlayerState.FastFalling ? fastXMoveLate : 1;
-            float chargingLate = InputManeger.IsCharging() ? chargingAccelerateLate : 1;
+            if (state != PlayerState.ConstSpeed)
+            {
+                float fastItemLate = state == PlayerState.FastFalling ? fastXMoveLate : 1;
+                float chargingLate = InputManeger.IsCharging() ? chargingAccelerateLate : 1;
 
-            velocity_.x += InputManeger.HorizontalAxis() * acceleration * chargingLate * fastItemLate * Time.deltaTime;
+                velocity_.x += InputManeger.HorizontalAxis() * acceleration * chargingLate * fastItemLate * Time.deltaTime;
 
-            velocity_.x = Mathf.Clamp(velocity_.x, -limitSpeed, limitSpeed);
+                velocity_.x = Mathf.Clamp(velocity_.x, -limitSpeed, limitSpeed);
+            }
+            else
+            {
+                velocity_.x = InputManeger.HorizontalAxis() * limitSpeed;
+            }
         }
 
         if(transform.position.x > warpPosition)
@@ -180,6 +188,22 @@ public partial class PlayerController : MonoBehaviour
         }
     }
 
+    void StateReset()
+    {
+        state = PlayerState.Normal;
+
+        stateTimer = 0;
+
+        maxJumpableTime = 1;
+        if (!Isground)
+            jumpableTime--;
+
+        currentJumpPower = jumpPower;
+        rigidbody.gravityScale = 1f;
+
+        itemParticle.SetActive(false);
+    }
+
     void StateChanger()
     {
         if (state != PlayerState.Normal)
@@ -189,18 +213,7 @@ public partial class PlayerController : MonoBehaviour
 
         if (stateTimer > otherStateDuration)
         {
-            state = PlayerState.Normal;
-
-            stateTimer = 0;
-
-            maxJumpableTime = 1;
-            if(!Isground)
-                jumpableTime--;
-
-            currentJumpPower = jumpPower;
-            rigidbody.gravityScale = 1f;
-
-            itemParticle.SetActive(false);
+            StateReset();
         }
     }
 
@@ -286,6 +299,12 @@ public partial class PlayerController : MonoBehaviour
                 currentJumpPower = fastJumpPower;
                 rigidbody.gravityScale = fastGravityScale;
 
+                itemParticle.SetActive(true);
+            }
+            else if (itemName.Contains("ConstSpeed"))
+            {
+                StateReset();
+                state = PlayerState.ConstSpeed;
                 itemParticle.SetActive(true);
             }
 

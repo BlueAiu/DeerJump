@@ -8,7 +8,9 @@ public enum PlatformType
     Normal,
     Ice,
     Move,
-    Belt
+    Belt,
+    Gap,
+    Swamp
 }
 
 public struct PlatformInfo

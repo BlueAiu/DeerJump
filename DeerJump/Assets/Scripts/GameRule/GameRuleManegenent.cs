@@ -17,7 +17,7 @@ public partial class GameRuleManegenent : MonoBehaviour
     [SerializeField] GameObject goal;
     [SerializeField] float gameSizeWidth = 8f;
 
-    [SerializeField] Sprite[] platformSsprites;
+    [SerializeField] Sprite[] platformSprites;
 
     [Header("StageNum")]
     [SerializeField] int stageNum = 0;
@@ -50,7 +50,7 @@ public partial class GameRuleManegenent : MonoBehaviour
         StageInfomation.goal = goal;
         StageInfomation.gameSizeWidth = gameSizeWidth;
 
-        PlatformScript.sprites = platformSsprites;
+        PlatformScript.sprites = platformSprites;
 
         if (PlayerPrefs.HasKey("HighScore"))
         {

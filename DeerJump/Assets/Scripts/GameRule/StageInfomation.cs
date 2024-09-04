@@ -7,7 +7,10 @@ public enum ItemType
 {
     HighJump,
     DoubleJump,
-    FastFall
+    FastFall,
+    LongHorn,
+    WideSight,
+    ConstSpeed
 }
 
 public class StageInfomation
