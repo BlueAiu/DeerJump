@@ -60,6 +60,7 @@ public partial class PlayerController : MonoBehaviour
     [SerializeField] float fastHighJumpPower = 20f;
     [SerializeField] float fastChargeLate = 2f;
     [SerializeField] float fastXMoveLate = 1.5f;
+    [SerializeField] CameraView cameraView;
 
     [SerializeField] GameObject itemParticle;
 
@@ -83,6 +84,7 @@ public partial class PlayerController : MonoBehaviour
         StateReset();
 
         jumpableTime = maxJumpableTime;
+        cameraView.SetNormalFast();
 
         rigidbody.bodyType = RigidbodyType2D.Dynamic;
 
@@ -199,6 +201,8 @@ public partial class PlayerController : MonoBehaviour
         horn.SetActive(true);
         longHorn.SetActive(false);
 
+        cameraView.IsSizeWide = false;
+
         itemParticle.SetActive(false);
     }
 
@@ -301,6 +305,12 @@ public partial class PlayerController : MonoBehaviour
                 longHorn.SetActive(true);
 
                 itemParticle.SetActive(true);
+            }
+            else if (itemName.Contains(ItemType.WideSight.ToString()))
+            {
+                StateReset();
+                state = PlayerState.WideSight;
+                cameraView.IsSizeWide = true;
             }
             else if (itemName.Contains(ItemType.ConstSpeed.ToString()))
             {
