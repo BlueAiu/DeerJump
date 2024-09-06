@@ -22,6 +22,7 @@ public class StageInfomation
     public static float gameSizeWidth = 8f;
 
     const float platformUnit = 0.25f;
+    const float swampHeight = 0.39f;
     public float platformWidth;
     public List<PlatformInfo> platforms = new();
     public List<ItemType> items = new();
@@ -53,7 +54,9 @@ public class StageInfomation
             var _platform = Object.Instantiate(platform, pos, Quaternion.identity);
             _platform.GetComponent<PlatformScript>().Copy(platforms[i], posXRange);
 
-            _platform.GetComponent<BoxCollider2D>().size = new Vector2 (width, platformUnit);
+            _platform.GetComponent<BoxCollider2D>().size = new Vector2 (width,
+                platforms[i].type == PlatformType.Swamp ? swampHeight : platformUnit);
+
             var renderer = _platform.GetComponent<SpriteRenderer>();
             renderer.size = new Vector2 (width, platformUnit);
             renderer.sprite = PlatformScript.sprites[(int)platforms[i].type];

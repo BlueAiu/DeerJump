@@ -20,6 +20,8 @@ public partial class PlayerController : MonoBehaviour
     float stateTimer = 0f;
     Vector3 initPos;
 
+    const float normalLate = 1f;
+
     [SerializeField] GameRuleManegenent gameRuleManeger;
 
     [Header("‚’¼•ûŒü‚ÌˆÚ“®")]
@@ -64,8 +66,12 @@ public partial class PlayerController : MonoBehaviour
 
     [SerializeField] GameObject itemParticle;
 
+    [Header("‘«êŠÖŒW")]
+    [SerializeField] float swampChargeLate = 0.5f;
+
     public float PositionLimit { get { return warpPosition; } }
     bool isHited = false;
+    bool isSwamped = false;
 
 
 
@@ -89,6 +95,7 @@ public partial class PlayerController : MonoBehaviour
         rigidbody.bodyType = RigidbodyType2D.Dynamic;
 
         isHited = false;
+        isSwamped = false;
     }
 
     // Start is called before the first frame update
@@ -127,14 +134,16 @@ public partial class PlayerController : MonoBehaviour
 
         if (InputManeger.IsCharging())
         {
-            chargeTime += Time.deltaTime * (state == PlayerState.FastFalling ? fastChargeLate : 1);
+            chargeTime += Time.deltaTime *
+                (state == PlayerState.FastFalling ? fastChargeLate : normalLate) *
+                (isSwamped ? swampChargeLate : normalLate);
 
             chargeTime = Mathf.Min(chargeTime, chargeLimit);
             chargeLate = chargeTime / chargeLimit;
         }
         else if (chargeTime > 0f)
         {
-            chargeLate = chargeMin + chargeLate * (1 - chargeMin);
+            chargeLate = chargeMin + chargeLate * (normalLate - chargeMin);
 
             if (jumpableTime > 0)
             {
@@ -153,7 +162,7 @@ public partial class PlayerController : MonoBehaviour
             chargeTime = 0; chargeLate = 0;
         }
 
-        velocity_.y = Mathf.Max(velocity_.y, -terminalVelocity * (state == PlayerState.FastFalling ? fastGravityScale : 1));
+        velocity_.y = Mathf.Max(velocity_.y, -terminalVelocity * (state == PlayerState.FastFalling ? fastGravityScale : normalLate));
     }
 
     void HorizontalVelocity()
@@ -162,8 +171,8 @@ public partial class PlayerController : MonoBehaviour
         {
             if (state != PlayerState.ConstSpeed)
             {
-                float fastItemLate = state == PlayerState.FastFalling ? fastXMoveLate : 1;
-                float chargingLate = InputManeger.IsCharging() ? chargingAccelerateLate : 1;
+                float fastItemLate = state == PlayerState.FastFalling ? fastXMoveLate : normalLate;
+                float chargingLate = InputManeger.IsCharging() ? chargingAccelerateLate : normalLate;
 
                 velocity_.x += InputManeger.HorizontalAxis() * acceleration * chargingLate * fastItemLate * Time.deltaTime;
 
@@ -238,6 +247,10 @@ public partial class PlayerController : MonoBehaviour
                 if(platformType == PlatformType.Move)
                 {
                     transform.parent = collision.transform;
+                }
+                if(platformType == PlatformType.Swamp)
+                {
+                    isSwamped = true;
                 }
             }
         }

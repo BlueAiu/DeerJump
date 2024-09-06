@@ -53,6 +53,10 @@ public class CameraView : MonoBehaviour
 
     public void SetNormalFast()
     {
+        if(cam == null)
+        {
+            cam = GetComponent<Camera>();
+        }
         cam.orthographicSize = normalSize;
 
         foreach (var obj in blackSides)
