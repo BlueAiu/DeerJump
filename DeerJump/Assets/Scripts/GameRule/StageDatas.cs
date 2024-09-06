@@ -4,7 +4,7 @@ using UnityEngine;
 
 public partial class GameRuleManegenent : MonoBehaviour
 {
-    void AddPlatform(PlatformType type, int num, ref StageInfomation stageInfo, float moveSpeed = 0f, float beltSpeed = 0f)
+    void AddPlatform(PlatformType type, int num, ref StageInfomation stageInfo, float moveSpeed = 0f, float beltSpeed = 0f, float gap = 0f)
     {
         for(int i = 0; i < num; i++)
         {
@@ -12,7 +12,8 @@ public partial class GameRuleManegenent : MonoBehaviour
             {
                 type = type,
                 moveSpeed = moveSpeed,
-                beltSpeed = beltSpeed
+                beltSpeed = beltSpeed,
+                gap = gap
             };
             stageInfo.platforms.Add(platform);
         }
@@ -31,6 +32,8 @@ public partial class GameRuleManegenent : MonoBehaviour
         const float normalSpeed = 2.5f;
         const float fastSpeed = 5f;
 
+        const float normalGap = 1f;
+        const float wideGap = 3f;
 
 
         //1

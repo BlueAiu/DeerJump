@@ -45,21 +45,46 @@ public class StageInfomation
             Vector3 pos = Vector3.zero;
             pos.y = goal.transform.position.y / (platforms.Count + 1) * (i + 1);
 
-            float width = platformWidth + Random.Range(-platformUnit, platformUnit);
-            width = Mathf.Round(width / platformUnit) * platformUnit;
-            float posXRange = (gameSizeWidth - width) / 2;
+            GameObject _platform = null;
 
-            pos.x = Random.Range(-posXRange, posXRange);
+            if (platforms[i].type == PlatformType.Gap)
+            {
+                float width = platforms[i].gap;
+                float posXRange = (gameSizeWidth - width) / 2;
 
-            var _platform = Object.Instantiate(platform, pos, Quaternion.identity);
-            _platform.GetComponent<PlatformScript>().Copy(platforms[i], posXRange);
+                pos.x = Random.Range(-posXRange, posXRange);
 
-            _platform.GetComponent<BoxCollider2D>().size = new Vector2 (width,
-                platforms[i].type == PlatformType.Swamp ? swampHeight : platformUnit);
+                _platform = Object.Instantiate(platform, pos, Quaternion.identity);
+                _platform.GetComponent<PlatformScript>().Copy(platforms[i], posXRange);
 
-            var renderer = _platform.GetComponent<SpriteRenderer>();
-            renderer.size = new Vector2 (width, platformUnit);
-            renderer.sprite = PlatformScript.sprites[(int)platforms[i].type];
+                _platform.GetComponent<BoxCollider2D>().enabled = false;
+                _platform.GetComponent<SpriteRenderer>().enabled = false;
+
+                var platformScript = _platform.GetComponent<PlatformScript>();
+                platformScript.leftPillar.SetActive(true);
+                platformScript.rightPillar.SetActive(true);
+                platformScript.leftPillar.transform.localPosition = new Vector3(-platforms[i].gap / 2, 0, 0);
+                platformScript.rightPillar.transform.localPosition = new Vector3(platforms[i].gap / 2, 0, 0);
+            }
+            else
+            {
+                float width = platformWidth + Random.Range(-platformUnit, platformUnit);
+                width = Mathf.Round(width / platformUnit) * platformUnit;
+                float posXRange = (gameSizeWidth - width) / 2;
+
+                pos.x = Random.Range(-posXRange, posXRange);
+
+                _platform = Object.Instantiate(platform, pos, Quaternion.identity);
+                _platform.GetComponent<PlatformScript>().Copy(platforms[i], posXRange);
+
+                _platform.GetComponent<BoxCollider2D>().size = new Vector2(width,
+                    platforms[i].type == PlatformType.Swamp ? swampHeight : platformUnit);
+
+                var renderer = _platform.GetComponent<SpriteRenderer>();
+                renderer.size = new Vector2(width, platformUnit);
+                renderer.sprite = PlatformScript.sprites[(int)platforms[i].type];
+            }
+
 
             stage.Add(_platform);
         }

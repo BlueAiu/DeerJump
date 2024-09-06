@@ -18,12 +18,14 @@ public struct PlatformInfo
     public PlatformType type;
     public float moveSpeed;
     public float beltSpeed;
+    public float gap;
 
     public PlatformInfo(int n = 0)
     {
         type = PlatformType.Normal;
         moveSpeed = 0;
         beltSpeed = 0;
+        gap = 0;
     }
 }
 
@@ -45,6 +47,9 @@ public class PlatformScript : MonoBehaviour
     float actionTimer = 0;
     [SerializeField] Sprite[] beltSprites;
     [SerializeField] float beltSpritePeriod = 0.3f;
+
+    public GameObject leftPillar;
+    public GameObject rightPillar;
 
     // Start is called before the first frame update
     void Start()

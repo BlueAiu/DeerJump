@@ -261,6 +261,7 @@ public partial class PlayerController : MonoBehaviour
         if(collision.gameObject.CompareTag("Platform") && Isground)
         {
             Isground = false;
+            isSwamped = false;
             jumpableTime--;
 
             transform.parent = null;
