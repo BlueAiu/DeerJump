@@ -32,9 +32,11 @@ public partial class GameRuleManegenent : MonoBehaviour
         const float normalSpeed = 2.5f;
         const float fastSpeed = 5f;
 
-        const float normalGap = 1f;
-        const float wideGap = 3f;
+        const float normalGap = 3f;
+        const float wideGap = 5f;
 
+
+        //原作の1~20ステージを短縮
 
         //1
         {
@@ -51,24 +53,14 @@ public partial class GameRuleManegenent : MonoBehaviour
             var stageInfo = new StageInfomation();
 
             stageInfo.platformWidth = 3;
-            AddPlatform(PlatformType.Normal,17, ref stageInfo);
+            AddPlatform(PlatformType.Normal,16, ref stageInfo);
+
+            AddItem(ItemType.HighJump, 5, ref stageInfo);
 
             Stages[1] = stageInfo; 
         }
 
         //3
-        {
-            var stageInfo = new StageInfomation();
-
-            stageInfo.platformWidth = 3;
-            AddPlatform(PlatformType.Normal,15, ref stageInfo);
-
-            AddItem(ItemType.HighJump,5, ref stageInfo);
-
-            Stages[2] = stageInfo;
-        }
-
-        //4
         {
             var stageInfo = new StageInfomation();
 
@@ -79,24 +71,10 @@ public partial class GameRuleManegenent : MonoBehaviour
 
             AddItem(ItemType.HighJump, 1, ref stageInfo);
 
-            Stages[3] = stageInfo;
+            Stages[2] = stageInfo;
         }
 
-        //5
-        {
-            var stageInfo = new StageInfomation();
-
-            stageInfo.platformWidth = 3;
-
-            AddPlatform(PlatformType.Normal, 5, ref stageInfo);
-            AddPlatform(PlatformType.Ice, 11, ref stageInfo);
-
-            AddItem(ItemType.HighJump, 1, ref stageInfo);
-
-            Stages[4] = stageInfo;
-        }
-
-        //6
+        //4
         {
             var stageInfo = new StageInfomation();
 
@@ -107,24 +85,10 @@ public partial class GameRuleManegenent : MonoBehaviour
 
             AddItem(ItemType.HighJump, 1, ref stageInfo);
 
-            Stages[5] = stageInfo;
+            Stages[3] = stageInfo;
         }
 
-        //7
-        {
-            var stageInfo = new StageInfomation();
-
-            stageInfo.platformWidth = 2.5f;
-
-            AddPlatform(PlatformType.Normal, 6, ref stageInfo);
-            AddPlatform(PlatformType.Move, 10, ref stageInfo, moveSpeed: normalSpeed);
-
-            AddItem(ItemType.HighJump, 1, ref stageInfo);
-
-            Stages[6] = stageInfo;
-        }
-
-        //8
+        //5
         {
             var stageInfo = new StageInfomation();
 
@@ -136,10 +100,11 @@ public partial class GameRuleManegenent : MonoBehaviour
 
             AddItem(ItemType.DoubleJump, 3, ref stageInfo);
 
-            Stages[7] = stageInfo;
+
+            Stages[4] = stageInfo;
         }
 
-        //9
+        //6
         {
             var stageInfo = new StageInfomation();
 
@@ -151,23 +116,26 @@ public partial class GameRuleManegenent : MonoBehaviour
 
             AddItem(ItemType.DoubleJump, 5, ref stageInfo);
 
-            Stages[8] = stageInfo;
+
+            Stages[5] = stageInfo;
         }
 
-        //10
+        //7
         {
             var stageInfo = new StageInfomation();
 
-            stageInfo.platformWidth = 1.5f;
+            stageInfo.platformWidth = 2;
 
-            AddPlatform(PlatformType.Normal, 15, ref stageInfo);
+            AddPlatform(PlatformType.Normal, 10, ref stageInfo);
+            AddPlatform(PlatformType.Ice, 5, ref stageInfo);
 
             AddItem(ItemType.FastFall, 3, ref stageInfo);
 
-            Stages[9] = stageInfo;
+
+            Stages[6] = stageInfo;
         }
 
-        //11
+        //8
         {
             var stageInfo = new StageInfomation();
 
@@ -178,24 +146,10 @@ public partial class GameRuleManegenent : MonoBehaviour
 
             AddItem(ItemType.HighJump, 2, ref stageInfo);
 
-            Stages[10] = stageInfo;
+            Stages[7] = stageInfo;
         }
 
-        //12
-        {
-            var stageInfo = new StageInfomation();
-
-            stageInfo.platformWidth = 2.5f;
-
-            AddPlatform(PlatformType.Normal, 5, ref stageInfo);
-            AddPlatform(PlatformType.Belt, 10, ref stageInfo, beltSpeed: normalSpeed);
-
-            AddItem(ItemType.HighJump, 2, ref stageInfo);
-
-            Stages[11] = stageInfo;
-        }
-
-        //13
+        //9
         {
             var stageInfo = new StageInfomation();
 
@@ -210,6 +164,74 @@ public partial class GameRuleManegenent : MonoBehaviour
             AddItem(ItemType.DoubleJump, 1, ref stageInfo);
             AddItem(ItemType.FastFall, 1, ref stageInfo);
 
+            Stages[8] = stageInfo;
+        }
+
+        //10
+        {
+            var stageInfo = new StageInfomation();
+
+            stageInfo.platformWidth = 2.5f;
+
+            AddPlatform(PlatformType.Normal, 7, ref stageInfo);
+            AddPlatform(PlatformType.Ice, 3, ref stageInfo);
+            AddPlatform(PlatformType.Move, 3, ref stageInfo, moveSpeed: fastSpeed);
+            AddPlatform(PlatformType.Belt, 3, ref stageInfo, beltSpeed: normalSpeed);
+
+            AddItem(ItemType.HighJump, 1, ref stageInfo);
+            AddItem(ItemType.DoubleJump, 5, ref stageInfo);
+            AddItem(ItemType.FastFall, 1, ref stageInfo);
+
+            Stages[9] = stageInfo;
+        }
+
+        //ここから新要素
+
+        //11
+        {
+            var stageInfo = new StageInfomation();
+
+            stageInfo.platformWidth = 1f;
+
+            AddPlatform(PlatformType.Normal, 7, ref stageInfo);
+            AddPlatform(PlatformType.Ice, 3, ref stageInfo);
+            AddPlatform(PlatformType.Move, 3, ref stageInfo, moveSpeed: normalSpeed);
+            AddPlatform(PlatformType.Belt, 3, ref stageInfo, beltSpeed: normalSpeed);
+
+            AddItem(ItemType.LongHorn, 3, ref stageInfo);
+
+            Stages[10] = stageInfo;
+        }
+
+        //12
+        {
+            var stageInfo = new StageInfomation();
+
+            stageInfo.platformWidth = 2.5f;
+
+            AddPlatform(PlatformType.Normal, 3, ref stageInfo);
+            AddPlatform(PlatformType.Ice, 3, ref stageInfo);
+            AddPlatform(PlatformType.Move, 10, ref stageInfo, moveSpeed: fastSpeed);
+
+            AddItem(ItemType.HighJump, 1, ref stageInfo);
+            AddItem(ItemType.WideSight, 3, ref stageInfo);
+
+            Stages[11] = stageInfo;
+        }
+
+        //13
+        {
+            var stageInfo = new StageInfomation();
+
+            stageInfo.platformWidth = 1.5f;
+
+            AddPlatform(PlatformType.Normal, 4, ref stageInfo);
+            AddPlatform(PlatformType.Ice, 9, ref stageInfo);
+            AddPlatform(PlatformType.Belt, 2, ref stageInfo, beltSpeed: normalSpeed);
+
+            AddItem(ItemType.HighJump, 1, ref stageInfo);
+            AddItem(ItemType.ConstSpeed, 3, ref stageInfo);
+
             Stages[12] = stageInfo;
         }
 
@@ -221,12 +243,10 @@ public partial class GameRuleManegenent : MonoBehaviour
 
             AddPlatform(PlatformType.Normal, 4, ref stageInfo);
             AddPlatform(PlatformType.Ice, 2, ref stageInfo);
-            AddPlatform(PlatformType.Move, 0, ref stageInfo, moveSpeed: normalSpeed);
-            AddPlatform(PlatformType.Belt, 9, ref stageInfo, beltSpeed: normalSpeed);
+            AddPlatform(PlatformType.Swamp, 9, ref stageInfo);
 
-            AddItem(ItemType.HighJump, 1, ref stageInfo);
-            AddItem(ItemType.DoubleJump, 1, ref stageInfo);
-            AddItem(ItemType.FastFall, 1, ref stageInfo);
+            AddItem(ItemType.DoubleJump, 2, ref stageInfo);
+            AddItem(ItemType.FastFall, 2, ref stageInfo);
 
             Stages[13] = stageInfo;
         }
@@ -237,11 +257,12 @@ public partial class GameRuleManegenent : MonoBehaviour
 
             stageInfo.platformWidth = 1f;
 
-            AddPlatform(PlatformType.Normal, 10, ref stageInfo);
             AddPlatform(PlatformType.Ice, 3, ref stageInfo);
             AddPlatform(PlatformType.Move, 3, ref stageInfo, moveSpeed: normalSpeed);
+            AddPlatform(PlatformType.Gap, 10, ref stageInfo, gap: normalGap);
 
-            AddItem(ItemType.FastFall, 8, ref stageInfo);
+            AddItem(ItemType.HighJump, 1, ref stageInfo);
+            AddItem(ItemType.LongHorn, 3, ref stageInfo);
 
             Stages[14] = stageInfo;
         }
@@ -250,12 +271,14 @@ public partial class GameRuleManegenent : MonoBehaviour
         {
             var stageInfo = new StageInfomation();
 
-            stageInfo.platformWidth = 1f;
+            stageInfo.platformWidth = 1.5f;
 
             AddPlatform(PlatformType.Normal, 16, ref stageInfo);
 
-            AddItem(ItemType.HighJump, 5, ref stageInfo);
-            AddItem(ItemType.FastFall, 1, ref stageInfo);
+            AddItem(ItemType.HighJump, 1, ref stageInfo);
+            AddItem(ItemType.LongHorn, 1, ref stageInfo);
+            AddItem(ItemType.WideSight, 1, ref stageInfo);
+            AddItem(ItemType.ConstSpeed, 1, ref stageInfo);
 
             Stages[15] = stageInfo;
         }
@@ -267,8 +290,8 @@ public partial class GameRuleManegenent : MonoBehaviour
             stageInfo.platformWidth = 2.5f;
 
             AddPlatform(PlatformType.Normal, 3, ref stageInfo);
-            AddPlatform(PlatformType.Ice, 3, ref stageInfo);
-            AddPlatform(PlatformType.Move, 10, ref stageInfo, moveSpeed: normalSpeed);
+            AddPlatform(PlatformType.Swamp, 7, ref stageInfo);
+            AddPlatform(PlatformType.Gap, 7, ref stageInfo, gap: normalGap);
 
             AddItem(ItemType.HighJump, 1, ref stageInfo);
             AddItem(ItemType.DoubleJump, 1, ref stageInfo);
@@ -283,10 +306,19 @@ public partial class GameRuleManegenent : MonoBehaviour
 
             stageInfo.platformWidth = 2f;
 
-            AddPlatform(PlatformType.Move, 11, ref stageInfo, moveSpeed: fastSpeed);
-            AddPlatform(PlatformType.Belt, 6, ref stageInfo, beltSpeed: normalSpeed);
+            AddPlatform(PlatformType.Normal, 1, ref stageInfo);
+            AddPlatform(PlatformType.Ice, 3 , ref stageInfo);
+            AddPlatform(PlatformType.Move, 3, ref stageInfo, moveSpeed: normalSpeed);
+            AddPlatform(PlatformType.Belt, 3, ref stageInfo, beltSpeed: normalSpeed);
+            AddPlatform(PlatformType.Swamp, 3, ref stageInfo);
+            AddPlatform(PlatformType.Gap, 3, ref stageInfo, gap: normalGap);
 
             AddItem(ItemType.HighJump, 1, ref stageInfo);
+            AddItem(ItemType.DoubleJump, 1, ref stageInfo);
+            AddItem(ItemType.FastFall, 1, ref stageInfo);
+            AddItem(ItemType.LongHorn, 1, ref stageInfo);
+            AddItem(ItemType.WideSight, 1, ref stageInfo);
+            AddItem(ItemType.ConstSpeed, 1, ref stageInfo);
 
             Stages[17] = stageInfo;
         }
@@ -295,12 +327,17 @@ public partial class GameRuleManegenent : MonoBehaviour
         {
             var stageInfo = new StageInfomation();
 
-            stageInfo.platformWidth = 1.5f;
+            stageInfo.platformWidth = 2.5f;
 
-            AddPlatform(PlatformType.Normal, 5, ref stageInfo);
-            AddPlatform(PlatformType.Ice, 13, ref stageInfo);
+            AddPlatform(PlatformType.Normal, 2, ref stageInfo);
+            AddPlatform(PlatformType.Ice, 2, ref stageInfo);
+            AddPlatform(PlatformType.Move, 4, ref stageInfo, moveSpeed: fastSpeed);
+            AddPlatform(PlatformType.Belt,4, ref stageInfo, beltSpeed: fastSpeed);
+            AddPlatform(PlatformType.Gap, 4, ref stageInfo, gap: wideGap);
 
-            AddItem(ItemType.FastFall, 3, ref stageInfo);
+            AddItem(ItemType.DoubleJump, 1, ref stageInfo);
+            AddItem(ItemType.FastFall, 1, ref stageInfo);
+            AddItem(ItemType.LongHorn, 1, ref stageInfo);
 
             Stages[18] = stageInfo;
         }
@@ -309,25 +346,26 @@ public partial class GameRuleManegenent : MonoBehaviour
         {
             var stageInfo = new StageInfomation();
 
-            stageInfo.platformWidth = 1f;
+            stageInfo.platformWidth = 1.5f;
 
-            AddPlatform(PlatformType.Normal, 7, ref stageInfo);
-            AddPlatform(PlatformType.Ice, 3, ref stageInfo);
-            AddPlatform(PlatformType.Move, 3, ref stageInfo, moveSpeed: fastSpeed);
-            AddPlatform(PlatformType.Belt, 3, ref stageInfo, beltSpeed: normalSpeed);
+            AddPlatform(PlatformType.Normal, 2, ref stageInfo);
+            AddPlatform(PlatformType.Ice, 5, ref stageInfo);
+            AddPlatform(PlatformType.Move, 10, ref stageInfo, moveSpeed: fastSpeed);
 
-            AddItem(ItemType.HighJump, 0, ref stageInfo);
-            AddItem(ItemType.DoubleJump, 7, ref stageInfo);
-            AddItem(ItemType.FastFall, 0, ref stageInfo);
+            AddItem(ItemType.HighJump, 1, ref stageInfo);
+            AddItem(ItemType.FastFall, 1, ref stageInfo);
+            AddItem(ItemType.WideSight, 1, ref stageInfo);
 
             Stages[19] = stageInfo;
         }
+
+        //原作21~25若干改変
 
         //21
         {
             var stageInfo = new StageInfomation();
 
-            stageInfo.platformWidth = 1.5f;
+            stageInfo.platformWidth = 1.75f;
 
             AddPlatform(PlatformType.Normal, 2, ref stageInfo);
             AddPlatform(PlatformType.Ice, 7, ref stageInfo);
@@ -346,7 +384,7 @@ public partial class GameRuleManegenent : MonoBehaviour
 
             stageInfo.platformWidth = 2f;
 
-            AddPlatform(PlatformType.Normal, 3, ref stageInfo);
+            AddPlatform(PlatformType.Normal, 4, ref stageInfo);
             AddPlatform(PlatformType.Ice, 2, ref stageInfo);
             AddPlatform(PlatformType.Move, 9, ref stageInfo, moveSpeed: fastSpeed);
             AddPlatform(PlatformType.Belt, 1, ref stageInfo, beltSpeed: fastSpeed);
@@ -358,7 +396,7 @@ public partial class GameRuleManegenent : MonoBehaviour
         {
             var stageInfo = new StageInfomation();
 
-            stageInfo.platformWidth = 1f;
+            stageInfo.platformWidth = 1.25f;
 
             AddPlatform(PlatformType.Normal, 6, ref stageInfo);
             AddPlatform(PlatformType.Ice, 4, ref stageInfo);
@@ -378,7 +416,7 @@ public partial class GameRuleManegenent : MonoBehaviour
             stageInfo.platformWidth = 2f;
 
             AddPlatform(PlatformType.Move, 8, ref stageInfo, moveSpeed: fastSpeed);
-            AddPlatform(PlatformType.Belt, 6, ref stageInfo, beltSpeed: fastSpeed);
+            AddPlatform(PlatformType.Belt, 7, ref stageInfo, beltSpeed: fastSpeed);
 
             AddItem(ItemType.HighJump, 1, ref stageInfo);
             AddItem(ItemType.DoubleJump, 1, ref stageInfo);
@@ -391,9 +429,9 @@ public partial class GameRuleManegenent : MonoBehaviour
         {
             var stageInfo = new StageInfomation();
 
-            stageInfo.platformWidth = 1f;
+            stageInfo.platformWidth = 1.25f;
 
-            AddPlatform(PlatformType.Normal, 0, ref stageInfo);
+            AddPlatform(PlatformType.Normal, 1, ref stageInfo);
             AddPlatform(PlatformType.Ice, 3, ref stageInfo);
             AddPlatform(PlatformType.Move, 5, ref stageInfo, moveSpeed: fastSpeed);
             AddPlatform(PlatformType.Belt, 5, ref stageInfo, beltSpeed: fastSpeed);
@@ -404,5 +442,129 @@ public partial class GameRuleManegenent : MonoBehaviour
 
             Stages[24] = stageInfo;
         }
+
+        //新要素込みの高難度終盤ステージ
+
+        //26
+        {
+            var stageInfo = new StageInfomation();
+
+            stageInfo.platformWidth = 1.5f;
+
+            AddPlatform(PlatformType.Normal, 3, ref stageInfo);
+            AddPlatform(PlatformType.Ice, 5, ref stageInfo);
+            AddPlatform(PlatformType.Swamp, 5, ref stageInfo);
+            AddPlatform(PlatformType.Gap, 7, ref stageInfo, gap: wideGap);
+
+            AddItem(ItemType.LongHorn, 1, ref stageInfo);
+            AddItem(ItemType.WideSight, 2, ref stageInfo);
+            AddItem(ItemType.ConstSpeed, 3, ref stageInfo);
+
+            Stages[25] = stageInfo;
+        }
+
+        //27
+        {
+            var stageInfo = new StageInfomation();
+
+            stageInfo.platformWidth = 1.5f;
+
+            AddPlatform(PlatformType.Ice, 3, ref stageInfo);
+            AddPlatform(PlatformType.Move, 5, ref stageInfo, moveSpeed: fastSpeed);
+            AddPlatform(PlatformType.Belt, 4, ref stageInfo, beltSpeed: fastSpeed);
+            AddPlatform(PlatformType.Swamp, 4, ref stageInfo);
+
+            AddItem(ItemType.FastFall, 1, ref stageInfo);
+            AddItem(ItemType.WideSight, 1, ref stageInfo);
+
+            Stages[26] = stageInfo;
+        }
+
+        //28
+        {
+            var stageInfo = new StageInfomation();
+
+            stageInfo.platformWidth = 1f;
+
+            AddPlatform(PlatformType.Normal, 1, ref stageInfo);
+            AddPlatform(PlatformType.Ice, 5, ref stageInfo);
+            AddPlatform(PlatformType.Move, 1, ref stageInfo, moveSpeed: fastSpeed);
+            AddPlatform(PlatformType.Belt, 1, ref stageInfo, beltSpeed: fastSpeed);
+            AddPlatform(PlatformType.Swamp, 1, ref stageInfo);
+            AddPlatform(PlatformType.Gap, 5, ref stageInfo, gap: wideGap);
+
+            AddItem(ItemType.HighJump, 1, ref stageInfo);
+            AddItem(ItemType.DoubleJump, 1, ref stageInfo);
+            AddItem(ItemType.LongHorn, 1, ref stageInfo);
+            AddItem(ItemType.ConstSpeed, 1, ref stageInfo);
+
+            Stages[27] = stageInfo;
+        }
+
+        //29
+        {
+            var stageInfo = new StageInfomation();
+
+            stageInfo.platformWidth = 1.5f;
+
+            AddPlatform(PlatformType.Move, 6, ref stageInfo, moveSpeed: fastSpeed);
+            AddPlatform(PlatformType.Belt, 3, ref stageInfo, beltSpeed: fastSpeed);
+            AddPlatform(PlatformType.Swamp, 3, ref stageInfo);
+            AddPlatform(PlatformType.Gap, 6, ref stageInfo, gap: wideGap);
+
+            AddItem(ItemType.DoubleJump, 1, ref stageInfo);
+            AddItem(ItemType.FastFall, 1, ref stageInfo);
+            AddItem(ItemType.ConstSpeed, 1, ref stageInfo);
+
+            Stages[28] = stageInfo;
+        }
+
+        //30
+        {
+            var stageInfo = new StageInfomation();
+
+            stageInfo.platformWidth = 0.75f;
+
+            AddPlatform(PlatformType.Normal, 1, ref stageInfo);
+            AddPlatform(PlatformType.Ice, 2, ref stageInfo);
+            AddPlatform(PlatformType.Move, 5, ref stageInfo, moveSpeed: fastSpeed);
+            AddPlatform(PlatformType.Belt, 3, ref stageInfo, beltSpeed: fastSpeed);
+            AddPlatform(PlatformType.Swamp, 1, ref stageInfo);
+            AddPlatform(PlatformType.Gap, 2, ref stageInfo, gap: wideGap);
+
+            AddItem(ItemType.HighJump, 1, ref stageInfo);
+            AddItem(ItemType.DoubleJump, 1, ref stageInfo);
+            AddItem(ItemType.FastFall, 1, ref stageInfo);
+            AddItem(ItemType.LongHorn, 1, ref stageInfo);
+            AddItem(ItemType.WideSight, 1, ref stageInfo);
+            AddItem(ItemType.ConstSpeed, 1, ref stageInfo);
+
+            Stages[29] = stageInfo;
+        }
     }
 }
+
+/* template
+//26
+        {
+            var stageInfo = new StageInfomation();
+
+            stageInfo.platformWidth = 1f;
+
+            AddPlatform(PlatformType.Normal, 1, ref stageInfo);
+            AddPlatform(PlatformType.Ice, 3, ref stageInfo);
+            AddPlatform(PlatformType.Move, 3, ref stageInfo, moveSpeed: fastSpeed);
+            AddPlatform(PlatformType.Belt, 3, ref stageInfo, beltSpeed: fastSpeed);
+            AddPlatform(PlatformType.Swamp, 3, ref stageInfo);
+            AddPlatform(PlatformType.Gap, 3, ref stageInfo, gap: wideGap);
+
+            AddItem(ItemType.HighJump, 1, ref stageInfo);
+            AddItem(ItemType.DoubleJump, 1, ref stageInfo);
+            AddItem(ItemType.FastFall, 1, ref stageInfo);
+            AddItem(ItemType.LongHorn, 1, ref stageInfo);
+            AddItem(ItemType.WideSight, 1, ref stageInfo);
+            AddItem(ItemType.ConstSpeed, 1, ref stageInfo);
+
+            Stages[25] = stageInfo;
+        }
+ */

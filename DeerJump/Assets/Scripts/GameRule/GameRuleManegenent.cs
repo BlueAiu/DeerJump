@@ -21,7 +21,7 @@ public partial class GameRuleManegenent : MonoBehaviour
 
     [Header("StageNum")]
     [SerializeField] int stageNum = 0;
-    public StageInfomation[] Stages { get; set; } = new StageInfomation[25];
+    public StageInfomation[] Stages { get; set; } = new StageInfomation[30];
     public List<GameObject> StagePlacement { get; set; } = new();
 
     public float gameTimer;
