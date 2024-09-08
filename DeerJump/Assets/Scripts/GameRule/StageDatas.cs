@@ -32,8 +32,8 @@ public partial class GameRuleManegenent : MonoBehaviour
         const float normalSpeed = 2.5f;
         const float fastSpeed = 5f;
 
-        const float normalGap = 3f;
-        const float wideGap = 5f;
+        const float normalGap = 2f;
+        const float wideGap = 4f;
 
 
         //原作の1~20ステージを短縮

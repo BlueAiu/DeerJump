@@ -44,7 +44,7 @@ public partial class GameRuleManegenent : MonoBehaviour
         }
 
         HighScore = Mathf.Max(HighScore, Score);
-        PlayerPrefs.SetInt("HighScore", HighScore);
+        PlayerPrefs.SetInt("HighScore_2", HighScore);
         hiScoreText.text = HighScore.ToString();
 
         UnityroomApiClient.Instance.SendScore(1, Score, ScoreboardWriteMode.HighScoreDesc);

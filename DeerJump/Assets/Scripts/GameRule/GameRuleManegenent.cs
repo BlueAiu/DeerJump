@@ -52,9 +52,9 @@ public partial class GameRuleManegenent : MonoBehaviour
 
         PlatformScript.sprites = platformSprites;
 
-        if (PlayerPrefs.HasKey("HighScore"))
+        if (PlayerPrefs.HasKey("HighScore_2"))
         {
-            HighScore = PlayerPrefs.GetInt("HighScore");
+            HighScore = PlayerPrefs.GetInt("HighScore_2");
         }
         else
         {
