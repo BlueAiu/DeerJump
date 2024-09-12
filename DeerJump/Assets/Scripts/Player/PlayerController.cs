@@ -296,7 +296,10 @@ public partial class PlayerController : MonoBehaviour
                 state = PlayerState.DoubleJump;
 
                 maxJumpableTime = 2;
-                jumpableTime++;
+                if (!Isground)
+                    jumpableTime = 1;
+                else
+                    jumpableTime = maxJumpableTime;
 
                 itemParticle.SetActive(true);
             }

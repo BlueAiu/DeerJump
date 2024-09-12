@@ -353,7 +353,7 @@ public partial class GameRuleManegenent : MonoBehaviour
             AddPlatform(PlatformType.Move, 10, ref stageInfo, moveSpeed: fastSpeed);
 
             AddItem(ItemType.HighJump, 1, ref stageInfo);
-            AddItem(ItemType.FastFall, 1, ref stageInfo);
+            AddItem(ItemType.DoubleJump, 1, ref stageInfo);
             AddItem(ItemType.WideSight, 1, ref stageInfo);
 
             Stages[19] = stageInfo;
@@ -474,7 +474,7 @@ public partial class GameRuleManegenent : MonoBehaviour
             AddPlatform(PlatformType.Belt, 4, ref stageInfo, beltSpeed: fastSpeed);
             AddPlatform(PlatformType.Swamp, 4, ref stageInfo);
 
-            AddItem(ItemType.FastFall, 1, ref stageInfo);
+            AddItem(ItemType.DoubleJump, 1, ref stageInfo);
             AddItem(ItemType.WideSight, 1, ref stageInfo);
 
             Stages[26] = stageInfo;
@@ -494,7 +494,7 @@ public partial class GameRuleManegenent : MonoBehaviour
             AddPlatform(PlatformType.Gap, 5, ref stageInfo, gap: wideGap);
 
             AddItem(ItemType.HighJump, 1, ref stageInfo);
-            AddItem(ItemType.DoubleJump, 1, ref stageInfo);
+            AddItem(ItemType.FastFall, 1, ref stageInfo);
             AddItem(ItemType.LongHorn, 1, ref stageInfo);
             AddItem(ItemType.ConstSpeed, 1, ref stageInfo);
 
