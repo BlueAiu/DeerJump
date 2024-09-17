@@ -45,7 +45,7 @@ public class StageInfomation
             Vector3 pos = Vector3.zero;
             pos.y = goal.transform.position.y / (platforms.Count + 1) * (i + 1);
 
-            GameObject _platform = null;
+            GameObject _platform;
 
             if (platforms[i].type == PlatformType.Gap)
             {
@@ -77,11 +77,11 @@ public class StageInfomation
                 _platform = Object.Instantiate(platform, pos, Quaternion.identity);
                 _platform.GetComponent<PlatformScript>().Copy(platforms[i], posXRange);
 
-                _platform.GetComponent<BoxCollider2D>().size = new Vector2(width,
-                    platforms[i].type == PlatformType.Swamp ? swampHeight : platformUnit);
+                _platform.GetComponent<BoxCollider2D>().size = new Vector2(width, platformUnit);
 
                 var renderer = _platform.GetComponent<SpriteRenderer>();
-                renderer.size = new Vector2(width, platformUnit);
+                renderer.size = new Vector2(width,
+                    platforms[i].type == PlatformType.Swamp ? swampHeight : platformUnit);
                 renderer.sprite = PlatformScript.sprites[(int)platforms[i].type];
             }
 
